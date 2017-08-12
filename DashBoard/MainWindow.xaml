@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="47*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="bcs" Content="BCS" HorizontalAlignment="stretch"  VerticalAlignment="Stretch" Click="bcs_Click"/>
+            <Button Name="qcs" Content="QCS" Grid.Column="1" HorizontalAlignment="stretch"  VerticalAlignment="Stretch" Click="qcs_Click"/>
+            <Button Name="cpr" Content="CPR" Grid.Column="2" HorizontalAlignment="stretch"  VerticalAlignment="Stretch" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+              <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="20*"/>
+                <RowDefinition Height="80*"/>
+              </Grid.RowDefinitions>
+                <TextBlock Name="ToDay" Grid.Row="1" FontSize="18" HorizontalAlignment="Center" />
+            </Grid>
+            </Grid>
     </Grid>
 </Window>
