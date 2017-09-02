@@ -33,5 +33,6 @@ namespace DataAccessLayer
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Printer> Printers { get; set; }
         public virtual DbSet<QCSInfo> QCSInfoes { get; set; }
+        public virtual DbSet<Appointment> Appointments { get; set; }
     }
 }

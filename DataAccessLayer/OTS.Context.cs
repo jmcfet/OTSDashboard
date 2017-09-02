@@ -15,8 +15,8 @@ namespace DataAccessLayer
     
     public partial class Store1Entities : DbContext
     {
-        public Store1Entities()
-            : base("name=Store1Entities")
+        public Store1Entities(string store)
+            : base(store)
         {
         }
     

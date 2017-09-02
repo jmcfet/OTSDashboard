@@ -4,7 +4,24 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BCSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BCSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BCS.dbo.Appointments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Subject" Type="varchar(max)" />
+          <Property Name="Location" Type="varchar(max)" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Body" Type="varchar(max)" />
+          <Property Name="temp1" Type="varchar(max)" />
+          <Property Name="temp2" Type="varbinary" MaxLength="50" />
+          <Property Name="temp3" Type="varbinary" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" />
+        </EntityType>
         <EntityType Name="Bins">
           <Key>
             <PropertyRef Name="ID" />
@@ -120,6 +137,20 @@
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Printers" EntityType="Self.Printers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QCSInfo" EntityType="Self.QCSInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Appointments].[Subject] AS [Subject], 
+    [Appointments].[Location] AS [Location], 
+    [Appointments].[StartTime] AS [StartTime], 
+    [Appointments].[EndTime] AS [EndTime], 
+    [Appointments].[Body] AS [Body], 
+    [Appointments].[temp1] AS [temp1], 
+    [Appointments].[temp2] AS [temp2], 
+    [Appointments].[temp3] AS [temp3], 
+    [Appointments].[ID] AS [ID], 
+    [Appointments].[userid] AS [userid]
+    FROM [dbo].[Appointments] AS [Appointments]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Bins_Categories" Association="Self.FK_Bins_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Bins" EntitySet="Bins" />
@@ -129,8 +160,7 @@
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BCSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -261,7 +291,23 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
+          <EntitySet Name="Appointments" EntityType="BCSModel.Appointment" />
         </EntityContainer>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="temp1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="temp2" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="temp3" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -355,6 +401,22 @@
                 <ScalarProperty Name="HeatSeal" ColumnName="HeatSeal" />
                 <ScalarProperty Name="Bin" ColumnName="Bin" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="BCSModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="temp3" ColumnName="temp3" />
+                <ScalarProperty Name="temp2" ColumnName="temp2" />
+                <ScalarProperty Name="temp1" ColumnName="temp1" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

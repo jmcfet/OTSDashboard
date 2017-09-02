@@ -53,6 +53,9 @@
     <Compile Include="AppliedCr.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Appointment.cs">
+      <DependentUpon>BCS.tt</DependentUpon>
+    </Compile>
     <Compile Include="AutoNumber.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
@@ -132,6 +135,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Repository.cs" />
     <Compile Include="DeletedCust.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
@@ -210,6 +214,10 @@
     <Compile Include="MergedCust.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Appointments.cs" />
+    <Compile Include="Models\BindableObject.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="NoSale.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
