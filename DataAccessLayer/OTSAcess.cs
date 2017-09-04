@@ -100,6 +100,27 @@ namespace DataAccessLayer
 
             return modelAppts;
         }
+        public void SaveAppts(Models.Appointment appt)
+        {
+            Appointment apptdb = new Appointment()
+            {
+                Body = appt.Body,
+                EndTime = appt.EndTime,
+                Location = appt.Location,
+                StartTime = appt.StartTime,
+                Subject = appt.Subject
+            };
+            dbBCS.Appointments.Add(apptdb);
+            try
+            {
+                dbBCS.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+            }
+            
+        }
         public ObservableCollection<CustomerInfo> GetInvoices(string storeName)
         {
 

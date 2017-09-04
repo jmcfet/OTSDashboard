@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BCSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BCS.dbo.Appointments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Appointments">
           <Key>
             <PropertyRef Name="ID" />
@@ -129,6 +127,7 @@ warning 6002: The table/view 'BCS.dbo.Appointments' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BCSModelStoreContainer">
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bins" EntityType="Self.Bins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Configuration" EntityType="Self.Configuration" Schema="dbo" store:Type="Tables" />
@@ -137,20 +136,6 @@ warning 6002: The table/view 'BCS.dbo.Appointments' does not have a primary key 
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Printers" EntityType="Self.Printers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QCSInfo" EntityType="Self.QCSInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Appointments" EntityType="Self.Appointments" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Appointments].[Subject] AS [Subject], 
-    [Appointments].[Location] AS [Location], 
-    [Appointments].[StartTime] AS [StartTime], 
-    [Appointments].[EndTime] AS [EndTime], 
-    [Appointments].[Body] AS [Body], 
-    [Appointments].[temp1] AS [temp1], 
-    [Appointments].[temp2] AS [temp2], 
-    [Appointments].[temp3] AS [temp3], 
-    [Appointments].[ID] AS [ID], 
-    [Appointments].[userid] AS [userid]
-    FROM [dbo].[Appointments] AS [Appointments]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Bins_Categories" Association="Self.FK_Bins_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Bins" EntitySet="Bins" />
