@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -95,15 +96,18 @@ namespace DashBoard
 
             //     string basedir = System.AppDomain.CurrentDomain.BaseDirectory;
                        
-            NewAppFrame("BCS.exe", test);
-            NewAppFrame("QCS.exe", test1);
+            NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\","BCS.exe", test);
+            NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", test1);
+            WebBrowserHelper.ClearCache();
+            wbSample.Navigate("http://192.168.1.3");
+            HideScriptErrors(wbSample, true);
       //      NewAppFrame("cpr.exe", test2);
             ToDay.Text = DateTime.Now.ToLongDateString();
         }
 
-        void NewAppFrame(string exe,DockPanel panel)
+        void NewAppFrame(string basedir,string exe, DockPanel panel)
         {
-            string basedir = @"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\";
+            
             string exeName = basedir + exe;
             var procInfo = new System.Diagnostics.ProcessStartInfo(exeName);
             procInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(exeName);
@@ -141,6 +145,25 @@ namespace DashBoard
             ////     MoveWindow(_appWin, (int)Rect.Left, (int)Rect.Right, (int)Rect.Right - (int)Rect.Left, (int)Rect.Bottom - (int)Rect.Top + 50, true);
        //     MoveWindow(_appWin, 0, 0, 800, 800, true);
             int oldStyle = (int)GetWindowLong(_appWin, GWL_STYLE);
+        }
+        //this will hide the ugly script errors that are thrown by the WPF browser.
+        public void HideScriptErrors(WebBrowser wb, bool Hide)
+        {
+            FieldInfo fiComWebBrowser = typeof(WebBrowser)
+                .GetField("_axIWebBrowser2",
+                          BindingFlags.Instance | BindingFlags.NonPublic);
+            if (fiComWebBrowser == null) return;
+            object objComWebBrowser = fiComWebBrowser.GetValue(wb);
+            if (objComWebBrowser == null) return;
+            objComWebBrowser.GetType().InvokeMember(
+                "Silent", BindingFlags.SetProperty, null, objComWebBrowser,
+                new object[] { Hide });
+        }
+       
+
+        private void wbSample_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+ //           txtUrl.Text = e.Uri.OriginalString;
         }
         private void bcs_Click(object sender, RoutedEventArgs e)
         {

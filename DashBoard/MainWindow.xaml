@@ -23,8 +23,11 @@
                     <ColumnDefinition Width="600"></ColumnDefinition>
                     <ColumnDefinition Width="600"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <DockPanel  Grid.Row="0"  Grid.Column="0" Name="test"  Background="AliceBlue" />
-                <DockPanel  Grid.Row="0"  Grid.Column="0" Name="test1"  Background="AliceBlue" />
+                <DockPanel  Grid.Row="0"  Grid.Column="2" Name="test"  Background="AliceBlue" />
+                <DockPanel  Grid.Row="0"  Grid.Column="1" Name="test1"  Background="AliceBlue" />
+                <DockPanel  Grid.Row="0"  Grid.Column="0" Name="test2"  Background="AliceBlue" >
+                    <WebBrowser Name="wbSample" Navigating="wbSample_Navigating"></WebBrowser>
+                </DockPanel>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -32,7 +35,7 @@
                     <ColumnDefinition Width="600"></ColumnDefinition>
                     <ColumnDefinition Width="600"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <DockPanel  Grid.Row="0"  Grid.Column="0" Name="test2"  Background="red" />
+                <DockPanel  Grid.Row="0"  Grid.Column="0" Name="test3"  Background="red" />
             </Grid>
          
         </Grid>
