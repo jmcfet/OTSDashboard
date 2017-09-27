@@ -82,27 +82,29 @@ namespace DashBoard
             InitializeComponent();
             Loaded += MainWindow_Loaded;  
         }
-
+        public List<missingPieceInfo> missing;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            Results.Content = new DbQuerys();
             ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
             string StoreConnectionString = connections["Store1Entities"].ConnectionString;
-            // AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
+       //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
 
             //OTSAccess dal = new OTSAccess(StoreConnectionString);
-            //dal.GetEmployee(1);
+            //missing = dal.FindMissingOrders("test");
+            //data.ItemsSource = missing;
             //string error = string.Empty;
             //System.Collections.ObjectModel.ObservableCollection<Category> cats = dal.GetCats(out error);
 
             //     string basedir = System.AppDomain.CurrentDomain.BaseDirectory;
-                       
-            NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\","BCS.exe", test);
-            NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", test1);
-            WebBrowserHelper.ClearCache();
-            wbSample.Navigate("http://192.168.1.3");
-            HideScriptErrors(wbSample, true);
-      //      NewAppFrame("cpr.exe", test2);
-            ToDay.Text = DateTime.Now.ToLongDateString();
+
+            //NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\","BCS.exe", test);
+            //NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", test1);
+            //WebBrowserHelper.ClearCache();
+            //wbSample.Navigate("http://192.168.1.3");
+            //HideScriptErrors(wbSample, true);
+            //NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "qcs.exe", test3);
+            //       ToDay.Text = DateTime.Now.ToLongDateString();
         }
 
         void NewAppFrame(string basedir,string exe, DockPanel panel)
@@ -176,9 +178,9 @@ namespace DashBoard
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            base.OnClosing(e);
-            this.WindowState = System.Windows.WindowState.Minimized;
-            e.Cancel = true;
+            //base.OnClosing(e);
+            //this.WindowState = System.Windows.WindowState.Minimized;
+            //e.Cancel = true;
         }
     }
 }

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +13,22 @@ namespace DataAccessLayer
 {
     public class OTSAccess
     {
-        Store1Entities dbOTS;
+        AssemblyEntities assembly = new AssemblyEntities();
+        Store1Entities dbOTS, db1OTS, db2OTS, db3OTS, db4OTS;
         BCSEntities dbBCS = new BCSEntities();
+        
         public OTSAccess()
         {
-
-        }
-        public OTSAccess(string store)
-        {
-  
-            dbOTS = new Store1Entities(store);
+            ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
+            string StoreConnectionString = connections["Store1Entities"].ConnectionString;
+           
+            db1OTS = new Store1Entities(StoreConnectionString);
+            StoreConnectionString = connections["Store2Entities"].ConnectionString;
+            db2OTS = new Store1Entities(StoreConnectionString);
+            StoreConnectionString = connections["Store3Entities"].ConnectionString;
+            db3OTS = new Store1Entities(StoreConnectionString);
+            StoreConnectionString = connections["Store4Entities"].ConnectionString;
+            db4OTS = new Store1Entities(StoreConnectionString);
         }
 
         public Employee GetEmployee(int empid)
@@ -154,6 +163,65 @@ namespace DataAccessLayer
 
         }
 
+        public List<missingPieceInfo> FindMissingOrders(string storeName)
+        {
+            List<missingPieceInfo> miss = new List<missingPieceInfo>();
+            DateTime prev = DateTime.Today.AddDays(-5);
+            var q1 = from inv in assembly.Invoices
+                     where DbFunctions.TruncateTime(inv.InvoiceDate) >= prev
+                           
+                     group inv by inv.OrderID into groupedinvs
+                     select groupedinvs;
+                    
+
+            foreach (var group1 in q1)
+            {
+                int storeid = group1.First().StoreID;
+                dbOTS = db1OTS;
+                switch (storeid)
+                {
+                    case 2:
+                        dbOTS = db2OTS;
+                        break;
+                    case 3:
+                        dbOTS = db3OTS;
+                        break;
+                    case 4:
+                        dbOTS = db4OTS;
+                        break;
+                }
+   //             Debug.WriteLine("invoice " + group1.Name);
+                var q2 = from order in dbOTS.OrderDetails
+                         where group1.Key == order.OrderID
+                         group order by order.OrderID into groupedby
+                         select groupedby;
+                if (q2.Count() > 0)
+                {
+                    foreach (var group in q2)
+                    {
+                        int num = (int)group.Sum(o => o.Pieces);
+                        Invoice inv = group1.First();
+                        if (group.Sum(o=>o.Pieces) != group1.Sum(i=>i.Pieces))
+                        {
+                            missingPieceInfo info = new missingPieceInfo()
+                            {
+                                orderid = group1.Key,
+                                numInvoiced = (int)group1.Sum(i => i.Pieces),
+                                numOrders = num,
+                                storeid = inv.StoreID,
+                                date= inv.InvoiceDate.ToString()
+                            };
+                            miss.Add(info);
+                        }
+                    }
+                    
+
+                }
+            }
+            miss.OrderBy(d => d.date);
+            return miss;
+        }
+
     }
     public class CustomerInfo
     {
@@ -163,5 +231,13 @@ namespace DataAccessLayer
         public int invoiceID { get; set; }
         public string baggermemo { get; set; }
         public string invmemo { get; set; }
+    }
+    public class missingPieceInfo
+    {
+        public int orderid { get; set; }
+        public int numInvoiced { get; set; }
+        public int numOrders { get; set; }
+        public int storeid { get; set; }
+        public string date { get; set; }
     }
 }

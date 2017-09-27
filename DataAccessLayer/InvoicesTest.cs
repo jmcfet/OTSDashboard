@@ -12,7 +12,7 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoice
+    public partial class InvoicesTest
     {
         public int InvoiceID { get; set; }
         public int OrderID { get; set; }

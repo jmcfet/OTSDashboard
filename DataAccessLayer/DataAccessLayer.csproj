@@ -50,14 +50,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppliedCr.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
     <Compile Include="Appointment.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
+    <Compile Include="AssemAutoNumber.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Assembly.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assembly.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Assembly.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assembly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Assembly.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assembly.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AssemblyBay.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AssemblySetting.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
+    </Compile>
     <Compile Include="AutoNumber.cs">
       <DependentUpon>OTS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AutoSort.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="BCS.Context.cs">
       <AutoGen>True</AutoGen>
@@ -188,13 +218,19 @@
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
     <Compile Include="Invoice.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="InvoiceAdjust.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
     <Compile Include="InvoiceDetail.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>Assembly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoicesAssembled.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoicesTest.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="InvPaid.cs">
       <DependentUpon>OTS.tt</DependentUpon>
@@ -204,6 +240,9 @@
     </Compile>
     <Compile Include="KioskSetting.cs">
       <DependentUpon>OTS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="Lot.cs">
       <DependentUpon>OTS.tt</DependentUpon>
@@ -313,6 +352,9 @@
     <Compile Include="Stock.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
+    <Compile Include="StorageInvoice.cs">
+      <DependentUpon>Assembly.tt</DependentUpon>
+    </Compile>
     <Compile Include="Store.cs">
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
@@ -323,7 +365,7 @@
       <DependentUpon>OTS.tt</DependentUpon>
     </Compile>
     <Compile Include="Version.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="WirelessCarrier.cs">
       <DependentUpon>OTS.tt</DependentUpon>
@@ -341,6 +383,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BCS.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Assembly.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Assembly.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Assembly.edmx.diagram">
+      <DependentUpon>Assembly.edmx</DependentUpon>
+    </None>
     <None Include="BCS.edmx.diagram">
       <DependentUpon>BCS.edmx</DependentUpon>
     </None>
@@ -350,6 +399,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assembly.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Assembly.edmx</DependentUpon>
+      <LastGenOutput>Assembly.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Assembly.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Assembly.edmx</DependentUpon>
+      <LastGenOutput>Assembly.cs</LastGenOutput>
+    </Content>
     <Content Include="BCS.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BCS.edmx</DependentUpon>
