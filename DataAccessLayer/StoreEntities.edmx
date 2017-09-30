@@ -2379,6 +2379,95 @@ warning 6002: The table/view 'Store1.dbo.SalesTax' does not have a primary key d
           <Property Name="TaxTableID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Store1.dbo.SBCreditHolds1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SBCreditHolds1">
+          <Key>
+            <PropertyRef Name="CreditID" />
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CreditTypeID" />
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="AddedEmpID" />
+            <PropertyRef Name="AppliedEmpID" />
+            <PropertyRef Name="PaymentID" />
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="PaidAmount" />
+            <PropertyRef Name="Deleted" />
+            <PropertyRef Name="AutoCreditID" />
+          </Key>
+          <Property Name="CreditID" Type="int" Nullable="false" />
+          <Property Name="StoreID" Type="int" Nullable="false" />
+          <Property Name="CreditTypeID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="AddedEmpID" Type="int" Nullable="false" />
+          <Property Name="AppliedEmpID" Type="int" Nullable="false" />
+          <Property Name="PaymentID" Type="int" Nullable="false" />
+          <Property Name="CreditDate" Type="datetime" />
+          <Property Name="AppliedDate" Type="datetime" />
+          <Property Name="Description" Type="varchar" MaxLength="80" />
+          <Property Name="Total" Type="money" Nullable="false" />
+          <Property Name="PaidAmount" Type="money" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CardMasked" Type="varchar" MaxLength="25" />
+          <Property Name="CardAuthNo" Type="varchar" MaxLength="16" />
+          <Property Name="AutoCreditID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Store1.dbo.SBPaymentHolds1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SBPaymentHolds1">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="StationID" />
+            <PropertyRef Name="ClerkDrawerID" />
+            <PropertyRef Name="CashAmount" />
+            <PropertyRef Name="CheckAmount" />
+            <PropertyRef Name="CardAmount" />
+            <PropertyRef Name="TenderAmount" />
+            <PropertyRef Name="ChangeAmount" />
+            <PropertyRef Name="DrawerNumber" />
+            <PropertyRef Name="Deleted" />
+            <PropertyRef Name="IsDebitCard" />
+            <PropertyRef Name="GiftAmount" />
+            <PropertyRef Name="EcSwiped" />
+            <PropertyRef Name="CCKeyID" />
+            <PropertyRef Name="AccountType" />
+          </Key>
+          <Property Name="PaymentID" Type="int" Nullable="false" />
+          <Property Name="StoreID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="StationID" Type="int" Nullable="false" />
+          <Property Name="ClerkDrawerID" Type="int" Nullable="false" />
+          <Property Name="PayDate" Type="datetime" />
+          <Property Name="CheckNo" Type="varchar" MaxLength="16" />
+          <Property Name="CardNo" Type="varchar" MaxLength="80" />
+          <Property Name="CardExp" Type="varchar" MaxLength="8" />
+          <Property Name="CashAmount" Type="money" Nullable="false" />
+          <Property Name="CheckAmount" Type="money" Nullable="false" />
+          <Property Name="CardAmount" Type="money" Nullable="false" />
+          <Property Name="TenderAmount" Type="money" Nullable="false" />
+          <Property Name="ChangeAmount" Type="money" Nullable="false" />
+          <Property Name="DrawerNumber" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CardAuthNo" Type="varchar" MaxLength="16" />
+          <Property Name="IsDebitCard" Type="bit" Nullable="false" />
+          <Property Name="CardTroutD" Type="varchar" MaxLength="16" />
+          <Property Name="GiftAmount" Type="money" Nullable="false" />
+          <Property Name="GiftNo" Type="varchar" MaxLength="25" />
+          <Property Name="GiftAuthNo" Type="varchar" MaxLength="16" />
+          <Property Name="GiftTroutD" Type="varchar" MaxLength="16" />
+          <Property Name="CardMasked" Type="varchar" MaxLength="25" />
+          <Property Name="CardToken" Type="varchar" MaxLength="100" />
+          <Property Name="EcBlock" Type="varchar" MaxLength="224" />
+          <Property Name="EcKey" Type="varchar" MaxLength="20" />
+          <Property Name="EcSwiped" Type="bit" Nullable="false" />
+          <Property Name="CCKeyID" Type="int" Nullable="false" />
+          <Property Name="ResetDate" Type="datetime" />
+          <Property Name="AccountType" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Store1.dbo.ScanLogs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ScanLogs">
           <Key>
@@ -4052,6 +4141,62 @@ warning 6002: The table/view 'Store1.dbo.WirelessCarriers' does not have a prima
     [SalesTax].[TaxAuthorityID] AS [TaxAuthorityID], 
     [SalesTax].[TaxTableID] AS [TaxTableID]
     FROM [dbo].[SalesTax] AS [SalesTax]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SBCreditHolds1" EntityType="Self.SBCreditHolds1" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SBCreditHolds1].[CreditID] AS [CreditID], 
+    [SBCreditHolds1].[StoreID] AS [StoreID], 
+    [SBCreditHolds1].[CreditTypeID] AS [CreditTypeID], 
+    [SBCreditHolds1].[CustomerID] AS [CustomerID], 
+    [SBCreditHolds1].[AddedEmpID] AS [AddedEmpID], 
+    [SBCreditHolds1].[AppliedEmpID] AS [AppliedEmpID], 
+    [SBCreditHolds1].[PaymentID] AS [PaymentID], 
+    [SBCreditHolds1].[CreditDate] AS [CreditDate], 
+    [SBCreditHolds1].[AppliedDate] AS [AppliedDate], 
+    [SBCreditHolds1].[Description] AS [Description], 
+    [SBCreditHolds1].[Total] AS [Total], 
+    [SBCreditHolds1].[PaidAmount] AS [PaidAmount], 
+    [SBCreditHolds1].[Deleted] AS [Deleted], 
+    [SBCreditHolds1].[CardMasked] AS [CardMasked], 
+    [SBCreditHolds1].[CardAuthNo] AS [CardAuthNo], 
+    [SBCreditHolds1].[AutoCreditID] AS [AutoCreditID]
+    FROM [dbo].[SBCreditHolds1] AS [SBCreditHolds1]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SBPaymentHolds1" EntityType="Self.SBPaymentHolds1" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SBPaymentHolds1].[PaymentID] AS [PaymentID], 
+    [SBPaymentHolds1].[StoreID] AS [StoreID], 
+    [SBPaymentHolds1].[CustomerID] AS [CustomerID], 
+    [SBPaymentHolds1].[EmployeeID] AS [EmployeeID], 
+    [SBPaymentHolds1].[StationID] AS [StationID], 
+    [SBPaymentHolds1].[ClerkDrawerID] AS [ClerkDrawerID], 
+    [SBPaymentHolds1].[PayDate] AS [PayDate], 
+    [SBPaymentHolds1].[CheckNo] AS [CheckNo], 
+    [SBPaymentHolds1].[CardNo] AS [CardNo], 
+    [SBPaymentHolds1].[CardExp] AS [CardExp], 
+    [SBPaymentHolds1].[CashAmount] AS [CashAmount], 
+    [SBPaymentHolds1].[CheckAmount] AS [CheckAmount], 
+    [SBPaymentHolds1].[CardAmount] AS [CardAmount], 
+    [SBPaymentHolds1].[TenderAmount] AS [TenderAmount], 
+    [SBPaymentHolds1].[ChangeAmount] AS [ChangeAmount], 
+    [SBPaymentHolds1].[DrawerNumber] AS [DrawerNumber], 
+    [SBPaymentHolds1].[Deleted] AS [Deleted], 
+    [SBPaymentHolds1].[CardAuthNo] AS [CardAuthNo], 
+    [SBPaymentHolds1].[IsDebitCard] AS [IsDebitCard], 
+    [SBPaymentHolds1].[CardTroutD] AS [CardTroutD], 
+    [SBPaymentHolds1].[GiftAmount] AS [GiftAmount], 
+    [SBPaymentHolds1].[GiftNo] AS [GiftNo], 
+    [SBPaymentHolds1].[GiftAuthNo] AS [GiftAuthNo], 
+    [SBPaymentHolds1].[GiftTroutD] AS [GiftTroutD], 
+    [SBPaymentHolds1].[CardMasked] AS [CardMasked], 
+    [SBPaymentHolds1].[CardToken] AS [CardToken], 
+    [SBPaymentHolds1].[EcBlock] AS [EcBlock], 
+    [SBPaymentHolds1].[EcKey] AS [EcKey], 
+    [SBPaymentHolds1].[EcSwiped] AS [EcSwiped], 
+    [SBPaymentHolds1].[CCKeyID] AS [CCKeyID], 
+    [SBPaymentHolds1].[ResetDate] AS [ResetDate], 
+    [SBPaymentHolds1].[AccountType] AS [AccountType]
+    FROM [dbo].[SBPaymentHolds1] AS [SBPaymentHolds1]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ScanLogs" EntityType="Self.ScanLogs" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -6462,6 +6607,91 @@ warning 6002: The table/view 'Store1.dbo.WirelessCarriers' does not have a prima
           <Property Name="TaxAuthorityID" Type="Int32" Nullable="false" />
           <Property Name="TaxTableID" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="SBCreditHolds1">
+          <Key>
+            <PropertyRef Name="CreditID" />
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CreditTypeID" />
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="AddedEmpID" />
+            <PropertyRef Name="AppliedEmpID" />
+            <PropertyRef Name="PaymentID" />
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="PaidAmount" />
+            <PropertyRef Name="Deleted" />
+            <PropertyRef Name="AutoCreditID" />
+          </Key>
+          <Property Name="CreditID" Type="Int32" Nullable="false" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <Property Name="CreditTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="AddedEmpID" Type="Int32" Nullable="false" />
+          <Property Name="AppliedEmpID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="CreditDate" Type="DateTime" Precision="3" />
+          <Property Name="AppliedDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CardMasked" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CardAuthNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="AutoCreditID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SBPaymentHolds1">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="StationID" />
+            <PropertyRef Name="ClerkDrawerID" />
+            <PropertyRef Name="CashAmount" />
+            <PropertyRef Name="CheckAmount" />
+            <PropertyRef Name="CardAmount" />
+            <PropertyRef Name="TenderAmount" />
+            <PropertyRef Name="ChangeAmount" />
+            <PropertyRef Name="DrawerNumber" />
+            <PropertyRef Name="Deleted" />
+            <PropertyRef Name="IsDebitCard" />
+            <PropertyRef Name="GiftAmount" />
+            <PropertyRef Name="EcSwiped" />
+            <PropertyRef Name="CCKeyID" />
+            <PropertyRef Name="AccountType" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="StationID" Type="Int32" Nullable="false" />
+          <Property Name="ClerkDrawerID" Type="Int32" Nullable="false" />
+          <Property Name="PayDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CardNo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="CardExp" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="CashAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CheckAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CardAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TenderAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ChangeAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DrawerNumber" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CardAuthNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="IsDebitCard" Type="Boolean" Nullable="false" />
+          <Property Name="CardTroutD" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="GiftAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="GiftNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="GiftAuthNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="GiftTroutD" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CardMasked" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CardToken" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EcBlock" Type="String" MaxLength="224" FixedLength="false" Unicode="false" />
+          <Property Name="EcKey" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EcSwiped" Type="Boolean" Nullable="false" />
+          <Property Name="CCKeyID" Type="Int32" Nullable="false" />
+          <Property Name="ResetDate" Type="DateTime" Precision="3" />
+          <Property Name="AccountType" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="ScanLog">
           <Key>
             <PropertyRef Name="ScanLogID" />
@@ -6753,6 +6983,8 @@ warning 6002: The table/view 'Store1.dbo.WirelessCarriers' does not have a prima
           <EntitySet Name="RouteItems" EntityType="Self.RouteItem" />
           <EntitySet Name="RouteStops" EntityType="Self.RouteStop" />
           <EntitySet Name="SalesTaxes" EntityType="Self.SalesTax" />
+          <EntitySet Name="SBCreditHolds1" EntityType="Self.SBCreditHolds1" />
+          <EntitySet Name="SBPaymentHolds1" EntityType="Self.SBPaymentHolds1" />
           <EntitySet Name="ScanLogs" EntityType="Self.ScanLog" />
           <EntitySet Name="SOFBatches" EntityType="Self.SOFBatch" />
           <EntitySet Name="StatementBalances" EntityType="Self.StatementBalance" />
@@ -8323,6 +8555,66 @@ warning 6002: The table/view 'Store1.dbo.WirelessCarriers' does not have a prima
                 <ScalarProperty Name="StoreID" ColumnName="StoreID" />
                 <ScalarProperty Name="TaxAuthorityID" ColumnName="TaxAuthorityID" />
                 <ScalarProperty Name="TaxTableID" ColumnName="TaxTableID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SBCreditHolds1">
+            <EntityTypeMapping TypeName="Store1Model.SBCreditHolds1">
+              <MappingFragment StoreEntitySet="SBCreditHolds1">
+                <ScalarProperty Name="CreditID" ColumnName="CreditID" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="CreditTypeID" ColumnName="CreditTypeID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="AddedEmpID" ColumnName="AddedEmpID" />
+                <ScalarProperty Name="AppliedEmpID" ColumnName="AppliedEmpID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="CreditDate" ColumnName="CreditDate" />
+                <ScalarProperty Name="AppliedDate" ColumnName="AppliedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CardMasked" ColumnName="CardMasked" />
+                <ScalarProperty Name="CardAuthNo" ColumnName="CardAuthNo" />
+                <ScalarProperty Name="AutoCreditID" ColumnName="AutoCreditID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SBPaymentHolds1">
+            <EntityTypeMapping TypeName="Store1Model.SBPaymentHolds1">
+              <MappingFragment StoreEntitySet="SBPaymentHolds1">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+                <ScalarProperty Name="ClerkDrawerID" ColumnName="ClerkDrawerID" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="CardExp" ColumnName="CardExp" />
+                <ScalarProperty Name="CashAmount" ColumnName="CashAmount" />
+                <ScalarProperty Name="CheckAmount" ColumnName="CheckAmount" />
+                <ScalarProperty Name="CardAmount" ColumnName="CardAmount" />
+                <ScalarProperty Name="TenderAmount" ColumnName="TenderAmount" />
+                <ScalarProperty Name="ChangeAmount" ColumnName="ChangeAmount" />
+                <ScalarProperty Name="DrawerNumber" ColumnName="DrawerNumber" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CardAuthNo" ColumnName="CardAuthNo" />
+                <ScalarProperty Name="IsDebitCard" ColumnName="IsDebitCard" />
+                <ScalarProperty Name="CardTroutD" ColumnName="CardTroutD" />
+                <ScalarProperty Name="GiftAmount" ColumnName="GiftAmount" />
+                <ScalarProperty Name="GiftNo" ColumnName="GiftNo" />
+                <ScalarProperty Name="GiftAuthNo" ColumnName="GiftAuthNo" />
+                <ScalarProperty Name="GiftTroutD" ColumnName="GiftTroutD" />
+                <ScalarProperty Name="CardMasked" ColumnName="CardMasked" />
+                <ScalarProperty Name="CardToken" ColumnName="CardToken" />
+                <ScalarProperty Name="EcBlock" ColumnName="EcBlock" />
+                <ScalarProperty Name="EcKey" ColumnName="EcKey" />
+                <ScalarProperty Name="EcSwiped" ColumnName="EcSwiped" />
+                <ScalarProperty Name="CCKeyID" ColumnName="CCKeyID" />
+                <ScalarProperty Name="ResetDate" ColumnName="ResetDate" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

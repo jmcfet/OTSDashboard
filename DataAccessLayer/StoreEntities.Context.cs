@@ -86,6 +86,8 @@ namespace DataAccessLayer
         public virtual DbSet<RouteItem> RouteItems { get; set; }
         public virtual DbSet<RouteStop> RouteStops { get; set; }
         public virtual DbSet<SalesTax> SalesTaxes { get; set; }
+        public virtual DbSet<SBCreditHolds1> SBCreditHolds1 { get; set; }
+        public virtual DbSet<SBPaymentHolds1> SBPaymentHolds1 { get; set; }
         public virtual DbSet<ScanLog> ScanLogs { get; set; }
         public virtual DbSet<SOFBatch> SOFBatches { get; set; }
         public virtual DbSet<StatementBalance> StatementBalances { get; set; }

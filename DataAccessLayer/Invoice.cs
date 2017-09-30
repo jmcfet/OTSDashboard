@@ -35,7 +35,7 @@ namespace DataAccessLayer
         public int Tax1ID { get; set; }
         public decimal Taxable { get; set; }
         public decimal TaxTotal { get; set; }
-        public decimal SubTotal { get; set; }
+        public decimal Subtotal { get; set; }
         public decimal Total { get; set; }
         public decimal PaidAmount { get; set; }
         public int PaymentID { get; set; }
@@ -43,9 +43,9 @@ namespace DataAccessLayer
         public decimal DiscTotal { get; set; }
         public bool Deleted { get; set; }
         public decimal CoupDiscable { get; set; }
+        public Nullable<System.DateTime> PaymentDate { get; set; }
         public decimal SrvFeeable { get; set; }
         public decimal SrvFeeTotal { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
         public string HotelRoom { get; set; }
         public string GuestName { get; set; }
         public int ValetTicketID { get; set; }
@@ -63,7 +63,7 @@ namespace DataAccessLayer
         public bool IsSplit { get; set; }
         public int TaxAuthorityID { get; set; }
         public string BaggerMemo { get; set; }
-        public int PayCode { get; set; }
+        public int Paycode { get; set; }
         public Nullable<System.DateTime> AssemblyDate { get; set; }
         public Nullable<System.DateTime> MarkInDate { get; set; }
         public int MarkInEmpID { get; set; }

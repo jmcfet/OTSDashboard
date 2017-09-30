@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="386cb354ab874c3ca7418f38f0f84816" Name="Diagram1">
+      <Diagram DiagramId="394f845ed1fa4e27b1438e5e9cea78c9" Name="Diagram1">
         <EntityTypeShape EntityType="Store1Model.dtproperty" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Store1Model.AppliedCr" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Store1Model.AutoNumber" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -66,16 +66,18 @@
         <EntityTypeShape EntityType="Store1Model.RouteItem" Width="1.5" PointX="26.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Store1Model.RouteStop" Width="1.5" PointX="26.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Store1Model.SalesTax" Width="1.5" PointX="20.75" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.ScanLog" Width="1.5" PointX="26.75" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.SOFBatch" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.StatementBalance" Width="1.5" PointX="28.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.StatementHistory" Width="1.5" PointX="28.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.Stock" Width="1.5" PointX="28.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.Store" Width="1.5" PointX="28.75" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.TaxAuthority" Width="1.5" PointX="22.75" PointY="28.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.TimeCard" Width="1.5" PointX="14.75" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.Version" Width="1.5" PointX="24.75" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Store1Model.WirelessCarrier" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.SBCreditHolds1" Width="1.5" PointX="26.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.SBPaymentHolds1" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.ScanLog" Width="1.5" PointX="28.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.SOFBatch" Width="1.5" PointX="28.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.StatementBalance" Width="1.5" PointX="28.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.StatementHistory" Width="1.5" PointX="28.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.Stock" Width="1.5" PointX="22.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.Store" Width="1.5" PointX="28.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.TaxAuthority" Width="1.5" PointX="14.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.TimeCard" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.Version" Width="1.5" PointX="30.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Store1Model.WirelessCarrier" Width="1.5" PointX="30.75" PointY="7.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

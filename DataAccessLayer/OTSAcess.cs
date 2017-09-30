@@ -14,15 +14,22 @@ namespace DataAccessLayer
     public class OTSAccess
     {
         AssemblyEntities assembly = new AssemblyEntities();
-        Store1Entities dbOTS, db1OTS, db2OTS, db3OTS, db4OTS;
-        BCSEntities dbBCS = new BCSEntities();
         
+        Store1Entities  dbOTS, db1OTS,db2OTS, db3OTS, db4OTS;
+        BCSEntities dbBCS = new BCSEntities();
+    //   Unfortunately, you can only have one app.config file per executable, so if you have DLL’s linked into your application, they cannot have their own app.config files.
+
+    //  Solution is: You don't need to put the App.config file in the Class Library's project.
+    //You put the App.config file in the application that is referencing your class library's dll.
+
+
         public OTSAccess()
         {
             ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
-            string StoreConnectionString = connections["Store1Entities"].ConnectionString;
+            string StoreConnectionString = connections["Store1"].ConnectionString;
            
             db1OTS = new Store1Entities(StoreConnectionString);
+            
             StoreConnectionString = connections["Store2Entities"].ConnectionString;
             db2OTS = new Store1Entities(StoreConnectionString);
             StoreConnectionString = connections["Store3Entities"].ConnectionString;
@@ -162,6 +169,38 @@ namespace DataAccessLayer
             return new ObservableCollection<CustomerInfo>(invinfo);
 
         }
+        public List<CPRCounts> getCPRCounts()
+        {
+            //ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
+            //string connectionString = string.Empty;
+            List<string> storeNames = new List<string>() { "Haile", "Millhopper" , "Westgate", "HuntersCrossing" };
+            List<CPRCounts> storecounts = new List<CPRCounts>();
+
+            for (int storeid = 0; storeid < 4; storeid++)
+            {
+                dbOTS = db1OTS;
+                switch (storeid)
+                {
+                    case 2:
+                        dbOTS = db2OTS;
+                        break;
+                    case 3:
+                        dbOTS = db3OTS;
+                        break;
+                    case 4:
+                        dbOTS = db4OTS;
+                        break;
+                }
+
+                int count1 = FindInvoicesToCheck(storeNames[storeid]);
+                CPRCounts counts = new CPRCounts() { count = count1, Store = storeNames[storeid] };
+                storecounts.Add(counts);
+
+
+
+            }
+            return storecounts;
+        }
 
         public List<missingPieceInfo> FindMissingOrders(string storeName)
         {
@@ -222,7 +261,42 @@ namespace DataAccessLayer
             return miss;
         }
 
+        private int FindInvoicesToCheck(string storeName)
+        {
+            var q8 = from cust in dbOTS.Customers select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName };
+
+            var q1 = from inv in dbOTS.Invoices
+                     where inv.BaggerMemo != null && inv.PickupDate == null && inv.Rack != null && inv.Rack.ToLower() != "bagged"
+                     && inv.InvoiceID != 40002098 && inv.InvoiceID != 40002099
+                     join cust in dbOTS.Customers on inv.CustomerID equals cust.CustomerID
+                     select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
+
+            var q2 = from cust in dbOTS.Customers
+                     where cust.InvReminder != null
+                     join invoice in dbOTS.Invoices on cust.CustomerID equals invoice.CustomerID
+                     where invoice.PickupDate == null && invoice.Rack != null && invoice.Rack.ToLower() != "bagged"
+                     select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = invoice.Rack, invoiceID = invoice.InvoiceID, invmemo = cust.InvReminder, baggermemo = invoice.BaggerMemo };
+
+            //string test = ((ObjectQuery)q2).ToTraceString();
+
+            List<CustomerInfo> invinfo = q1.Union(q2).ToList();   //remove duplicates
+
+            //now get all the processed invoices that passed
+            List<int> processed = (from c in dbBCS.CPRs
+                                   where c.state == 1 && c.store == storeName
+                                   select c.invoiceid).ToList();
+            //if invoice was processed then remove
+            invinfo = (from inv in invinfo
+                       where !processed.Contains(inv.invoiceID)
+                       orderby inv.rack
+                       select inv).ToList();
+
+            return invinfo.Count();
+
+
+        }
     }
+
     public class CustomerInfo
     {
         public string LastName { get; set; }
@@ -239,5 +313,10 @@ namespace DataAccessLayer
         public int numOrders { get; set; }
         public int storeid { get; set; }
         public string date { get; set; }
+    }
+    public class CPRCounts
+    {
+        public string Store { get; set; }
+        public int count { get; set; }
     }
 }

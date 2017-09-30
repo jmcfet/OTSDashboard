@@ -31,7 +31,7 @@ namespace DashBoard
         {
             OTSAccess dal = new OTSAccess();
 
-            data.ItemsSource  = dal.FindMissingOrders("test");
+            data.ItemsSource = dal.getCPRCounts();
         }
     }
 }

@@ -54,7 +54,7 @@
       <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="AppliedCr.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Appointment.cs">
       <DependentUpon>BCS.tt</DependentUpon>
@@ -84,7 +84,7 @@
       <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="AutoNumber.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="AutoSort.cs">
       <DependentUpon>Assembly.tt</DependentUpon>
@@ -105,126 +105,126 @@
       <DependentUpon>BCS.edmx</DependentUpon>
     </Compile>
     <Compile Include="BillCyclePeriod.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="BillingCenter.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="BillingCycle.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Bin.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="Campaign.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CardBillAutoCredit.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CardBilling.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="CCAudit.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CCKey.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CCPaymentContract.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CCSetting.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CCStationSetting.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="ClerkDrawer.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ClockInAccount.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Configuration.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="Contact.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CPR.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="Credit.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Repository.cs" />
     <Compile Include="DeletedCust.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DeliveryCenter.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DeliveryGroup.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DeliveryLog.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="dtproperty.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EditedCust.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EmailLog.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeeDefault.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="GiftCardType.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="GiftTransaction.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="GLAccount.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="GLJournal.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="GSS.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="Heatseal.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ImageLibrary.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Inventory.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Invoice.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="InvoiceAdjust.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="InvoiceDetail.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="InvoicesAssembled.cs">
       <DependentUpon>Assembly.tt</DependentUpon>
@@ -233,149 +233,149 @@
       <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="InvPaid.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Item.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="KioskSetting.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Location.cs">
       <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="Lot.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="MerchantQTY.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="MergedCust.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Appointments.cs" />
     <Compile Include="Models\BindableObject.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="NoSale.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderDetail.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderProcess.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Original.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OTS.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OTS.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OTS.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OTS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OTS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OTS.edmx</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="OTSAcess.cs" />
     <Compile Include="OverdueStat.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PasswordHistory.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Payment.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Physical.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PostalCode.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Preference.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Printer.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurgedCust.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="QCSInfo.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="Reason.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Receipt.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Recurring.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RecurringGroup.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RouteItem.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RouteStop.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SalesTax.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SBCreditHolds1.cs">
+      <DependentUpon>StoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SBPaymentHolds1.cs">
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ScanLog.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SOFBatch.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="StatementBalance.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="StatementHistory.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Stock.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="StorageInvoice.cs">
       <DependentUpon>Assembly.tt</DependentUpon>
     </Compile>
     <Compile Include="Store.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="TaxAuthority.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="TimeCard.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Version.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="WirelessCarrier.cs">
-      <DependentUpon>OTS.tt</DependentUpon>
+      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="OTS.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OTS.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -393,10 +393,14 @@
     <None Include="BCS.edmx.diagram">
       <DependentUpon>BCS.edmx</DependentUpon>
     </None>
-    <None Include="OTS.edmx.diagram">
-      <DependentUpon>OTS.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="StoreEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StoreEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="StoreEntities.edmx.diagram">
+      <DependentUpon>StoreEntities.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assembly.Context.tt">
@@ -419,15 +423,15 @@
       <DependentUpon>BCS.edmx</DependentUpon>
       <LastGenOutput>BCS.cs</LastGenOutput>
     </Content>
-    <Content Include="OTS.Context.tt">
+    <Content Include="StoreEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OTS.Context.cs</LastGenOutput>
-      <DependentUpon>OTS.edmx</DependentUpon>
+      <DependentUpon>StoreEntities.edmx</DependentUpon>
+      <LastGenOutput>StoreEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="OTS.tt">
+    <Content Include="StoreEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OTS.edmx</DependentUpon>
-      <LastGenOutput>OTS.cs</LastGenOutput>
+      <DependentUpon>StoreEntities.edmx</DependentUpon>
+      <LastGenOutput>StoreEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

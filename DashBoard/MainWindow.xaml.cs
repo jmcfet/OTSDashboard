@@ -86,9 +86,7 @@ namespace DashBoard
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Results.Content = new DbQuerys();
-            ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
-            string StoreConnectionString = connections["Store1Entities"].ConnectionString;
-       //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
+        //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
 
             //OTSAccess dal = new OTSAccess(StoreConnectionString);
             //missing = dal.FindMissingOrders("test");
