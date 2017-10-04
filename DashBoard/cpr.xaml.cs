@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace DashBoard
 {
     /// <summary>
-    /// Interaction logic for DbQuerys.xaml
+    /// Interaction logic for cpr.xaml
     /// </summary>
-    public partial class DbQuerys : UserControl
+    public partial class cpr : UserControl
     {
-        public DbQuerys()
+        public cpr()
         {
             InitializeComponent();
             Loaded += Dbresults_Loaded;
@@ -31,7 +31,7 @@ namespace DashBoard
         {
             OTSAccess dal = new OTSAccess();
 
-            data.ItemsSource = dal.FindMissingOrders("test");
+            data.ItemsSource = dal.getCPRCounts();
         }
     }
 }

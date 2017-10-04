@@ -85,7 +85,10 @@ namespace DashBoard
         public List<missingPieceInfo> missing;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            
+         
             Results.Content = new DbQuerys();
+            Results1.Content = new cpr();
         //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
 
             //OTSAccess dal = new OTSAccess(StoreConnectionString);

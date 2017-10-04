@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer.StoreDB;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
@@ -13,9 +14,8 @@ namespace DataAccessLayer
 {
     public class OTSAccess
     {
-        AssemblyEntities assembly = new AssemblyEntities();
-        
-        Store1Entities  dbOTS, db1OTS,db2OTS, db3OTS, db4OTS;
+      
+        StoreContext  dbOTS, db1OTS,db2OTS, db3OTS, db4OTS;
         BCSEntities dbBCS = new BCSEntities();
     //   Unfortunately, you can only have one app.config file per executable, so if you have DLL’s linked into your application, they cannot have their own app.config files.
 
@@ -25,17 +25,7 @@ namespace DataAccessLayer
 
         public OTSAccess()
         {
-            ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
-            string StoreConnectionString = connections["Store1"].ConnectionString;
            
-            db1OTS = new Store1Entities(StoreConnectionString);
-            
-            StoreConnectionString = connections["Store2Entities"].ConnectionString;
-            db2OTS = new Store1Entities(StoreConnectionString);
-            StoreConnectionString = connections["Store3Entities"].ConnectionString;
-            db3OTS = new Store1Entities(StoreConnectionString);
-            StoreConnectionString = connections["Store4Entities"].ConnectionString;
-            db4OTS = new Store1Entities(StoreConnectionString);
         }
 
         public Employee GetEmployee(int empid)
@@ -171,8 +161,16 @@ namespace DataAccessLayer
         }
         public List<CPRCounts> getCPRCounts()
         {
-            //ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
-            //string connectionString = string.Empty;
+            ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
+            string StoreConnectionString = connections["StoreContext"].ConnectionString;
+
+            db1OTS = new StoreContext();
+            StoreConnectionString = connections["Store2Context"].ConnectionString;
+            db2OTS = new StoreContext(StoreConnectionString);
+            StoreConnectionString = connections["Store3Context"].ConnectionString;
+            db3OTS = new StoreContext(StoreConnectionString);
+            StoreConnectionString = connections["Store4Context"].ConnectionString;
+            db4OTS = new StoreContext(StoreConnectionString);
             List<string> storeNames = new List<string>() { "Haile", "Millhopper" , "Westgate", "HuntersCrossing" };
             List<CPRCounts> storecounts = new List<CPRCounts>();
 
@@ -191,7 +189,7 @@ namespace DataAccessLayer
                         dbOTS = db4OTS;
                         break;
                 }
-
+               
                 int count1 = FindInvoicesToCheck(storeNames[storeid]);
                 CPRCounts counts = new CPRCounts() { count = count1, Store = storeNames[storeid] };
                 storecounts.Add(counts);
@@ -204,8 +202,21 @@ namespace DataAccessLayer
 
         public List<missingPieceInfo> FindMissingOrders(string storeName)
         {
+            DataAccessLayer.AssemblyDB.Assembly assembly = new DataAccessLayer.AssemblyDB.Assembly();
+            ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
+            string StoreConnectionString = connections["StoreContext"].ConnectionString;
+
+            db1OTS = new StoreContext(StoreConnectionString);
+      //      List<Invoice> invs = assembly.Invoices.Take(10).ToList();
+            StoreConnectionString = connections["Store2Context"].ConnectionString;
+            db2OTS = new StoreContext(StoreConnectionString);
+            StoreConnectionString = connections["Store3Context"].ConnectionString;
+            db3OTS = new StoreContext(StoreConnectionString);
+            StoreConnectionString = connections["Store4Context"].ConnectionString;
+            db4OTS = new StoreContext(StoreConnectionString);
+            List<DataAccessLayer.AssemblyDB.Invoice> invs  = assembly.Invoices.Take(10).ToList();
             List<missingPieceInfo> miss = new List<missingPieceInfo>();
-            DateTime prev = DateTime.Today.AddDays(-5);
+            DateTime prev = DateTime.Today.AddDays(-1);
             var q1 = from inv in assembly.Invoices
                      where DbFunctions.TruncateTime(inv.InvoiceDate) >= prev
                            
@@ -239,7 +250,7 @@ namespace DataAccessLayer
                     foreach (var group in q2)
                     {
                         int num = (int)group.Sum(o => o.Pieces);
-                        Invoice inv = group1.First();
+                        DataAccessLayer.AssemblyDB.Invoice inv = group1.First();
                         if (group.Sum(o=>o.Pieces) != group1.Sum(i=>i.Pieces))
                         {
                             missingPieceInfo info = new missingPieceInfo()
@@ -263,8 +274,6 @@ namespace DataAccessLayer
 
         private int FindInvoicesToCheck(string storeName)
         {
-            var q8 = from cust in dbOTS.Customers select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName };
-
             var q1 = from inv in dbOTS.Invoices
                      where inv.BaggerMemo != null && inv.PickupDate == null && inv.Rack != null && inv.Rack.ToLower() != "bagged"
                      && inv.InvoiceID != 40002098 && inv.InvoiceID != 40002099

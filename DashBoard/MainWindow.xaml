@@ -9,15 +9,15 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="1000"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Visibility="Collapsed">
+        <Grid Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="800"></RowDefinition>
                 <RowDefinition Height="400"></RowDefinition>
                
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="1" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="700"></ColumnDefinition>
                     <ColumnDefinition Width="600"></ColumnDefinition>
@@ -29,17 +29,18 @@
                     <WebBrowser Name="wbSample" Navigating="wbSample_Navigating"></WebBrowser>
                 </DockPanel>
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0" Background="Aquamarine">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="600"></ColumnDefinition>
                     <ColumnDefinition Width="600"></ColumnDefinition>
                     <ColumnDefinition Width="600"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <DockPanel  Grid.Row="0"  Grid.Column="0" Name="test3"   />
+                <ScrollViewer    Grid.Column="0" Name="Results" Background="Black"  />
+                <ScrollViewer    Grid.Column="1" Name="Results1" Background="Bisque"  />
             </Grid>
          
         </Grid>
        
-        <ScrollViewer Grid.Row="1"    Background="AntiqueWhite" Name="Results"/>
+       
     </Grid>
 </Window>

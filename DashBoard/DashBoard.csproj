@@ -64,6 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="cpr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DbQuerys.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +81,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BrowserHelper.cs" />
+    <Compile Include="cpr.xaml.cs">
+      <DependentUpon>cpr.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DbQuerys.xaml.cs">
       <DependentUpon>DbQuerys.xaml</DependentUpon>
     </Compile>

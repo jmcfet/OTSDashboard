@@ -50,45 +50,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alert.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppliedCr.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Appointment.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
-    <Compile Include="AssemAutoNumber.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Assembly.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Assembly.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Assembly.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Assembly.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Assembly.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="AssemblyBay.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AssemblySetting.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AutoNumber.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AutoSort.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
+    <Compile Include="AssemblyDB\Alert.cs" />
+    <Compile Include="AssemblyDB\AssemAutoNumber.cs" />
+    <Compile Include="AssemblyDB\Assembly.cs" />
+    <Compile Include="AssemblyDB\AssemblyBay.cs" />
+    <Compile Include="AssemblyDB\AssemblySetting.cs" />
+    <Compile Include="AssemblyDB\AutoSort.cs" />
+    <Compile Include="AssemblyDB\Invoice.cs" />
+    <Compile Include="AssemblyDB\InvoiceDetail.cs" />
+    <Compile Include="AssemblyDB\InvoicesAssembled.cs" />
+    <Compile Include="AssemblyDB\InvoicesTest.cs" />
+    <Compile Include="AssemblyDB\Location.cs" />
+    <Compile Include="AssemblyDB\StorageInvoice.cs" />
+    <Compile Include="AssemblyDB\Version.cs" />
     <Compile Include="BCS.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -104,315 +81,124 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BCS.edmx</DependentUpon>
     </Compile>
-    <Compile Include="BillCyclePeriod.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BillingCenter.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BillingCycle.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Bin.cs">
       <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Campaign.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CardBillAutoCredit.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CardBilling.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
-    <Compile Include="CCAudit.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CCKey.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CCPaymentContract.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CCSetting.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CCStationSetting.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Class1.cs" />
-    <Compile Include="ClerkDrawer.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ClockInAccount.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Configuration.cs">
       <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Contact.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CPR.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
-    <Compile Include="Credit.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\Repository.cs" />
-    <Compile Include="DeletedCust.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DeliveryCenter.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DeliveryGroup.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DeliveryLog.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dtproperty.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EditedCust.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EmailLog.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EmployeeDefault.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GiftCardType.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GiftTransaction.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GLAccount.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GLJournal.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="GSS.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
-    <Compile Include="Heatseal.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ImageLibrary.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Inventory.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Invoice.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InvoiceAdjust.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InvoiceDetail.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InvoicesAssembled.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InvoicesTest.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InvPaid.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Item.cs">
       <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KioskSetting.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Location.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Lot.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MerchantQTY.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MergedCust.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Appointments.cs" />
     <Compile Include="Models\BindableObject.cs" />
     <Compile Include="Models\Event.cs" />
-    <Compile Include="NoSale.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Order.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OrderDetail.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OrderProcess.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Original.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="OTSAcess.cs" />
-    <Compile Include="OverdueStat.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PasswordHistory.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Payment.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Physical.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PostalCode.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Preference.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Printer.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurgedCust.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="QCSInfo.cs">
       <DependentUpon>BCS.tt</DependentUpon>
     </Compile>
-    <Compile Include="Reason.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Receipt.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Recurring.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RecurringGroup.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RouteItem.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RouteStop.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SalesTax.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SBCreditHolds1.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SBPaymentHolds1.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ScanLog.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SOFBatch.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StatementBalance.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StatementHistory.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Stock.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StorageInvoice.cs">
-      <DependentUpon>Assembly.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Store.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoreEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoreEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="TaxAuthority.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TimeCard.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Version.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WirelessCarrier.cs">
-      <DependentUpon>StoreEntities.tt</DependentUpon>
-    </Compile>
+    <Compile Include="StoreDB\AppliedCr.cs" />
+    <Compile Include="StoreDB\AutoNumber.cs" />
+    <Compile Include="StoreDB\BillCyclePeriod.cs" />
+    <Compile Include="StoreDB\BillingCenter.cs" />
+    <Compile Include="StoreDB\BillingCycle.cs" />
+    <Compile Include="StoreDB\Campaign.cs" />
+    <Compile Include="StoreDB\CardBillAutoCredit.cs" />
+    <Compile Include="StoreDB\CardBilling.cs" />
+    <Compile Include="StoreDB\CCAudit.cs" />
+    <Compile Include="StoreDB\CCKey.cs" />
+    <Compile Include="StoreDB\CCPaymentContract.cs" />
+    <Compile Include="StoreDB\CCSetting.cs" />
+    <Compile Include="StoreDB\CCStationSetting.cs" />
+    <Compile Include="StoreDB\ClerkDrawer.cs" />
+    <Compile Include="StoreDB\ClockInAccount.cs" />
+    <Compile Include="StoreDB\Contact.cs" />
+    <Compile Include="StoreDB\Credit.cs" />
+    <Compile Include="StoreDB\Customer.cs" />
+    <Compile Include="StoreDB\DeletedCust.cs" />
+    <Compile Include="StoreDB\DeliveryCenter.cs" />
+    <Compile Include="StoreDB\DeliveryGroup.cs" />
+    <Compile Include="StoreDB\DeliveryLog.cs" />
+    <Compile Include="StoreDB\dtproperty.cs" />
+    <Compile Include="StoreDB\EditedCust.cs" />
+    <Compile Include="StoreDB\EmailLog.cs" />
+    <Compile Include="StoreDB\Employee.cs" />
+    <Compile Include="StoreDB\EmployeeDefault.cs" />
+    <Compile Include="StoreDB\GiftCardType.cs" />
+    <Compile Include="StoreDB\GiftTransaction.cs" />
+    <Compile Include="StoreDB\GLAccount.cs" />
+    <Compile Include="StoreDB\GLJournal.cs" />
+    <Compile Include="StoreDB\Heatseal.cs" />
+    <Compile Include="StoreDB\ImageLibrary.cs" />
+    <Compile Include="StoreDB\Inventory.cs" />
+    <Compile Include="StoreDB\Invoice.cs" />
+    <Compile Include="StoreDB\InvoiceAdjust.cs" />
+    <Compile Include="StoreDB\InvoiceDetail.cs" />
+    <Compile Include="StoreDB\InvPaid.cs" />
+    <Compile Include="StoreDB\KioskSetting.cs" />
+    <Compile Include="StoreDB\Lot.cs" />
+    <Compile Include="StoreDB\MerchantQTY.cs" />
+    <Compile Include="StoreDB\MergedCust.cs" />
+    <Compile Include="StoreDB\NoSale.cs" />
+    <Compile Include="StoreDB\Order.cs" />
+    <Compile Include="StoreDB\OrderDetail.cs" />
+    <Compile Include="StoreDB\OrderProcess.cs" />
+    <Compile Include="StoreDB\Original.cs" />
+    <Compile Include="StoreDB\OverdueStat.cs" />
+    <Compile Include="StoreDB\PasswordHistory.cs" />
+    <Compile Include="StoreDB\Payment.cs" />
+    <Compile Include="StoreDB\Physical.cs" />
+    <Compile Include="StoreDB\PostalCode.cs" />
+    <Compile Include="StoreDB\Preference.cs" />
+    <Compile Include="StoreDB\PurgedCust.cs" />
+    <Compile Include="StoreDB\Reason.cs" />
+    <Compile Include="StoreDB\Receipt.cs" />
+    <Compile Include="StoreDB\Recurring.cs" />
+    <Compile Include="StoreDB\RecurringGroup.cs" />
+    <Compile Include="StoreDB\RouteItem.cs" />
+    <Compile Include="StoreDB\RouteStop.cs" />
+    <Compile Include="StoreDB\SalesTax.cs" />
+    <Compile Include="StoreDB\ScanLog.cs" />
+    <Compile Include="StoreDB\SOFBatch.cs" />
+    <Compile Include="StoreDB\StatementBalance.cs" />
+    <Compile Include="StoreDB\StatementHistory.cs" />
+    <Compile Include="StoreDB\Stock.cs" />
+    <Compile Include="StoreDB\Store.cs" />
+    <Compile Include="StoreDB\StoreContext.cs" />
+    <Compile Include="StoreDB\TaxAuthority.cs" />
+    <Compile Include="StoreDB\TimeCard.cs" />
+    <Compile Include="StoreDB\Version.cs" />
+    <Compile Include="StoreDB\WirelessCarrier.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="BCS.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BCS.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="Assembly.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Assembly.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Assembly.edmx.diagram">
-      <DependentUpon>Assembly.edmx</DependentUpon>
-    </None>
     <None Include="BCS.edmx.diagram">
       <DependentUpon>BCS.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <EntityDeploy Include="StoreEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>StoreEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="StoreEntities.edmx.diagram">
-      <DependentUpon>StoreEntities.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assembly.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Assembly.edmx</DependentUpon>
-      <LastGenOutput>Assembly.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Assembly.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Assembly.edmx</DependentUpon>
-      <LastGenOutput>Assembly.cs</LastGenOutput>
-    </Content>
     <Content Include="BCS.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BCS.edmx</DependentUpon>
@@ -422,16 +208,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BCS.edmx</DependentUpon>
       <LastGenOutput>BCS.cs</LastGenOutput>
-    </Content>
-    <Content Include="StoreEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StoreEntities.edmx</DependentUpon>
-      <LastGenOutput>StoreEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="StoreEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StoreEntities.edmx</DependentUpon>
-      <LastGenOutput>StoreEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
