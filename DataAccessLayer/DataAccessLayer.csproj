@@ -50,9 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Appointment.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Appointment.cs" />
     <Compile Include="AssemblyDB\Alert.cs" />
     <Compile Include="AssemblyDB\AssemAutoNumber.cs" />
     <Compile Include="AssemblyDB\Assembly.cs" />
@@ -66,52 +64,22 @@
     <Compile Include="AssemblyDB\Location.cs" />
     <Compile Include="AssemblyDB\StorageInvoice.cs" />
     <Compile Include="AssemblyDB\Version.cs" />
-    <Compile Include="BCS.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BCS.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BCS.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BCS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BCS.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Bin.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Category.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Configuration.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CPR.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
+    <Compile Include="BCSContext.cs" />
+    <Compile Include="Bin.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="CPR.cs" />
     <Compile Include="Data\Repository.cs" />
-    <Compile Include="GSS.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Item.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
+    <Compile Include="GSS.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Appointments.cs" />
     <Compile Include="Models\BindableObject.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="OTSAcess.cs" />
-    <Compile Include="Printer.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QCSInfo.cs">
-      <DependentUpon>BCS.tt</DependentUpon>
-    </Compile>
+    <Compile Include="QCSInfo.cs" />
     <Compile Include="StoreDB\AppliedCr.cs" />
     <Compile Include="StoreDB\AutoNumber.cs" />
     <Compile Include="StoreDB\BillCyclePeriod.cs" />
@@ -189,26 +157,7 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="BCS.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BCS.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="BCS.edmx.diagram">
-      <DependentUpon>BCS.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="BCS.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BCS.edmx</DependentUpon>
-      <LastGenOutput>BCS.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="BCS.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BCS.edmx</DependentUpon>
-      <LastGenOutput>BCS.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

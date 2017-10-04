@@ -87,7 +87,7 @@ namespace DashBoard
         {
             
          
-            Results.Content = new DbQuerys();
+      //      Results.Content = new DbQuerys();
             Results1.Content = new cpr();
         //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
 

@@ -16,12 +16,14 @@ namespace DataAccessLayer
     {
       
         StoreContext  dbOTS, db1OTS,db2OTS, db3OTS, db4OTS;
-        BCSEntities dbBCS = new BCSEntities();
-    //   Unfortunately, you can only have one app.config file per executable, so if you have DLL’s linked into your application, they cannot have their own app.config files.
-
-    //  Solution is: You don't need to put the App.config file in the Class Library's project.
-    //You put the App.config file in the application that is referencing your class library's dll.
-
+        BCSContext dbBCS = new BCSContext();
+        //Unfortunately, you can only have one app.config file per executable, so if you have DLL’s linked into your application,
+        //they cannot have their own app.config files.
+        //  Solution is: You don't need to put the App.config file in the Class Library's project.
+        //You put the App.config file in the application that is referencing your class library's dll.
+        //there is a nasty situation in the OTS schema in that the Invoice table appears in both
+        //the Assembly and the individual store databases and this causes grieve with the entity framework
+        //database first approach. The solution was to switch to code first .
 
         public OTSAccess()
         {
@@ -277,18 +279,10 @@ namespace DataAccessLayer
             var q1 = from inv in dbOTS.Invoices
                      where inv.BaggerMemo != null && inv.PickupDate == null && inv.Rack != null && inv.Rack.ToLower() != "bagged"
                      && inv.InvoiceID != 40002098 && inv.InvoiceID != 40002099
-                     join cust in dbOTS.Customers on inv.CustomerID equals cust.CustomerID
+                     from cust in dbOTS.Customers where inv.CustomerID == cust.CustomerID
                      select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
 
-            var q2 = from cust in dbOTS.Customers
-                     where cust.InvReminder != null
-                     join invoice in dbOTS.Invoices on cust.CustomerID equals invoice.CustomerID
-                     where invoice.PickupDate == null && invoice.Rack != null && invoice.Rack.ToLower() != "bagged"
-                     select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = invoice.Rack, invoiceID = invoice.InvoiceID, invmemo = cust.InvReminder, baggermemo = invoice.BaggerMemo };
-
-            //string test = ((ObjectQuery)q2).ToTraceString();
-
-            List<CustomerInfo> invinfo = q1.Union(q2).ToList();   //remove duplicates
+            List<CustomerInfo> invinfo = q1.ToList();   //remove duplicates
 
             //now get all the processed invoices that passed
             List<int> processed = (from c in dbBCS.CPRs
@@ -301,8 +295,7 @@ namespace DataAccessLayer
                        select inv).ToList();
 
             return invinfo.Count();
-
-
+     
         }
     }
 
