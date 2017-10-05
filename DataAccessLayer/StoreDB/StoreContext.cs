@@ -15,6 +15,7 @@ namespace DataAccessLayer.StoreDB
         public StoreContext(string conn)
             : base(conn)
         {
+            this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
         public virtual DbSet<dtproperty> dtproperties { get; set; }

@@ -167,12 +167,10 @@ namespace DataAccessLayer
             string StoreConnectionString = connections["StoreContext"].ConnectionString;
 
             db1OTS = new StoreContext();
-            StoreConnectionString = connections["Store2Context"].ConnectionString;
-            db2OTS = new StoreContext(StoreConnectionString);
-            StoreConnectionString = connections["Store3Context"].ConnectionString;
-            db3OTS = new StoreContext(StoreConnectionString);
-            StoreConnectionString = connections["Store4Context"].ConnectionString;
-            db4OTS = new StoreContext(StoreConnectionString);
+            
+            db2OTS = new StoreContext(connections["Store2Context"].ConnectionString);
+            db3OTS = new StoreContext(connections["Store3Context"].ConnectionString);
+            db4OTS = new StoreContext(connections["Store4Context"].ConnectionString);
             List<string> storeNames = new List<string>() { "Haile", "Millhopper" , "Westgate", "HuntersCrossing" };
             List<CPRCounts> storecounts = new List<CPRCounts>();
 
@@ -181,13 +179,13 @@ namespace DataAccessLayer
                 dbOTS = db1OTS;
                 switch (storeid)
                 {
-                    case 2:
+                    case 1:
                         dbOTS = db2OTS;
                         break;
-                    case 3:
+                    case 2:
                         dbOTS = db3OTS;
                         break;
-                    case 4:
+                    case 3:
                         dbOTS = db4OTS;
                         break;
                 }
@@ -278,10 +276,9 @@ namespace DataAccessLayer
         {
             var q1 = from inv in dbOTS.Invoices
                      where inv.BaggerMemo != null && inv.PickupDate == null && inv.Rack != null && inv.Rack.ToLower() != "bagged"
-                     && inv.InvoiceID != 40002098 && inv.InvoiceID != 40002099
                      from cust in dbOTS.Customers where inv.CustomerID == cust.CustomerID
                      select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
-
+          
             List<CustomerInfo> invinfo = q1.ToList();   //remove duplicates
 
             //now get all the processed invoices that passed
