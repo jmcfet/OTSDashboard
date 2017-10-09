@@ -161,7 +161,7 @@ namespace DataAccessLayer
             return new ObservableCollection<CustomerInfo>(invinfo);
 
         }
-        public List<CPRCounts> getCPRCounts()
+        public List<CustomerInfo> getCPRCounts()
         {
             ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
             string StoreConnectionString = connections["StoreContext"].ConnectionString;
@@ -172,7 +172,7 @@ namespace DataAccessLayer
             db3OTS = new StoreContext(connections["Store3Context"].ConnectionString);
             db4OTS = new StoreContext(connections["Store4Context"].ConnectionString);
             List<string> storeNames = new List<string>() { "Haile", "Millhopper" , "Westgate", "HuntersCrossing" };
-            List<CPRCounts> storecounts = new List<CPRCounts>();
+            List<CustomerInfo> storecounts = new List<CustomerInfo>();
 
             for (int storeid = 0; storeid < 4; storeid++)
             {
@@ -190,9 +190,9 @@ namespace DataAccessLayer
                         break;
                 }
                
-                int count1 = FindInvoicesToCheck(storeNames[storeid]);
-                CPRCounts counts = new CPRCounts() { count = count1, Store = storeNames[storeid] };
-                storecounts.Add(counts);
+               List<CustomerInfo> info = FindInvoicesToCheck(storeNames[storeid]);
+         //       CPRCounts counts = new CPRCounts() { count = count1, Store = storeNames[storeid] };
+                storecounts.AddRange(info);
 
 
 
@@ -272,26 +272,28 @@ namespace DataAccessLayer
             return miss;
         }
 
-        private int FindInvoicesToCheck(string storeName)
+        private List<CustomerInfo> FindInvoicesToCheck(string storeName)
         {
             var q1 = from inv in dbOTS.Invoices
                      where inv.BaggerMemo != null && inv.PickupDate == null && inv.Rack != null && inv.Rack.ToLower() != "bagged"
                      from cust in dbOTS.Customers where inv.CustomerID == cust.CustomerID
                      select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
           
-            List<CustomerInfo> invinfo = q1.ToList();   //remove duplicates
+            List<CustomerInfo> invinfo = q1.ToList();   
 
             //now get all the processed invoices that passed
             List<int> processed = (from c in dbBCS.CPRs
                                    where c.state == 1 && c.store == storeName
                                    select c.invoiceid).ToList();
+            List<int> invPaided = (from i in dbOTS.InvPaids
+                                   select i.InvoiceID).ToList();
             //if invoice was processed then remove
             invinfo = (from inv in invinfo
-                       where !processed.Contains(inv.invoiceID)
+                       where !processed.Contains(inv.invoiceID) && !invPaided.Contains(inv.invoiceID)
                        orderby inv.rack
                        select inv).ToList();
 
-            return invinfo.Count();
+            return invinfo;
      
         }
     }
