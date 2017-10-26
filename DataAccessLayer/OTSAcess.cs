@@ -277,7 +277,7 @@ namespace DataAccessLayer
             var q1 = from inv in dbOTS.Invoices
                      where inv.BaggerMemo != null && inv.PickupDate == null && inv.Rack != null && inv.Rack.ToLower() != "bagged"
                      from cust in dbOTS.Customers where inv.CustomerID == cust.CustomerID
-                     select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
+                     select new CustomerInfo() { storeName = storeName,   FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
           
             List<CustomerInfo> invinfo = q1.ToList();   
 
@@ -289,7 +289,7 @@ namespace DataAccessLayer
                                    select i.InvoiceID).ToList();
             //if invoice was processed then remove
             invinfo = (from inv in invinfo
-                       where !processed.Contains(inv.invoiceID) && !invPaided.Contains(inv.invoiceID)
+                       where !processed.Contains(inv.invoiceID) 
                        orderby inv.rack
                        select inv).ToList();
 
@@ -300,6 +300,7 @@ namespace DataAccessLayer
 
     public class CustomerInfo
     {
+        public string storeName { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string rack { get; set; }

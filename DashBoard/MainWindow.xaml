@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DashBoard"
         mc:Ignorable="d"
         Title="MainWindow" Height="1500" Width="1000">
+    <ScrollViewer>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -13,11 +14,11 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="800"></RowDefinition>
+                <RowDefinition Height="400"></RowDefinition>
                 <RowDefinition Height="400"></RowDefinition>
                
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1" Visibility="Collapsed">
+            <Grid Grid.Row="1" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="700"></ColumnDefinition>
                     <ColumnDefinition Width="600"></ColumnDefinition>
@@ -43,4 +44,5 @@
        
        
     </Grid>
+    </ScrollViewer>
 </Window>
