@@ -56,7 +56,11 @@ namespace DashBoard
         static extern bool GetWindowRect(IntPtr hWnd, ref Rect Rect);
         [DllImport("user32.dll", SetLastError = true)]
         static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
-
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool SendMessage(IntPtr hWnd, int msg,int wparam,int lparam);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
         private const int SWP_NOOWNERZORDER = 0x200;
         private const int SWP_NOREDRAW = 0x8;
         private const int SWP_NOZORDER = 0x4;
@@ -72,6 +76,8 @@ namespace DashBoard
         private const int WS_CHILD = 0x40000000;
         const int WS_CAPTION = 0x00C00000;
         const int SW_MAXIMIZE = 0x3;
+        const int WM_SIZE = 0x0005;
+
 
         IntPtr _appWin;
 
@@ -87,8 +93,8 @@ namespace DashBoard
         {
             
          
-            Results.Content = new DbQuerys();
-            Results1.Content = new cpr();
+            //Results.Content = new DbQuerys();
+            //Results1.Content = new cpr();
             //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
 
             //OTSAccess dal = new OTSAccess(StoreConnectionString);
@@ -99,11 +105,12 @@ namespace DashBoard
 
             //     string basedir = System.AppDomain.CurrentDomain.BaseDirectory;
 
-            NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "BCS.exe", test);
-            NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", test1);
+            NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "BCS.exe", bcs);
+            NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "qcs.exe", qcs);
+            NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", sch);
             WebBrowserHelper.ClearCache();
-            wbSample.Navigate("http://192.168.1.3");
-            HideScriptErrors(wbSample, true);
+            //wbSample.Navigate("http://192.168.1.3");
+            //HideScriptErrors(wbSample, true);
       //      NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "qcs.exe", test3);
             //       ToDay.Text = DateTime.Now.ToLongDateString();
         }
@@ -143,10 +150,11 @@ namespace DashBoard
             _appWin = _childp.MainWindowHandle;
             //      PR.WaitForInputIdle(); // true if the associated process has reached an idle state.
             SetParent(_appWin, _pnlSched.Handle); // loading exe to the wpf window.
-
+           
+            SetWindowPos(_pnlSched.Handle,IntPtr.Zero, 0, 0, 100, 100, SWP_SHOWWINDOW);
             // if (GetWindowRect(_pnlSched.Handle, ref Rect))
             ////     MoveWindow(_appWin, (int)Rect.Left, (int)Rect.Right, (int)Rect.Right - (int)Rect.Left, (int)Rect.Bottom - (int)Rect.Top + 50, true);
-       //     MoveWindow(_appWin, 0, 0, 800, 800, true);
+            //     MoveWindow(_appWin, 0, 0, 800, 800, true);
             int oldStyle = (int)GetWindowLong(_appWin, GWL_STYLE);
         }
         //this will hide the ugly script errors that are thrown by the WPF browser.
