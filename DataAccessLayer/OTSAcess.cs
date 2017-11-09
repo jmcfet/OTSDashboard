@@ -296,6 +296,37 @@ namespace DataAccessLayer
             return invinfo;
      
         }
+
+        public List<ShirtInfo> getShirtCount()
+        {
+            DataAccessLayer.AssemblyDB.Assembly assembly = new DataAccessLayer.AssemblyDB.Assembly();
+            var q1 = from inv in assembly.InvoiceDetails
+                     where inv.GarmentID == 100 || inv.GarmentID == 345
+                     join auto in assembly.AutoSorts on inv.ArticleCode equals auto.ArticleCode
+                     where DbFunctions.TruncateTime(auto.DueDate) == DateTime.Today
+                     //       from auto in assembly.AutoSorts
+                     //       where inv.InvDetailID == auto.InvoiceID
+                     ////       && auto.DueDate == DateTime.Now
+                     select new ShirtInfo { articleID = inv.ArticleCode , invoiceID = inv.InvoiceID, dueDate = auto.DueDate};
+
+            //var q3 = from inv in assembly.InvoiceDetails
+            //         where inv.GarmentID == 100 || inv.GarmentID == 345
+
+            //         select inv ;
+            //List<AssemblyDB.InvoiceDetail> details = q3.ToList();
+            //List<AssemblyDB.InvoiceDetail> filtered = new List<AssemblyDB.InvoiceDetail>();
+            //foreach (AssemblyDB.InvoiceDetail det in details)
+            //{
+            //    AssemblyDB.AutoSort a = (from aut in assembly.AutoSorts where aut.ArticleCode == det.ArticleCode select aut).SingleOrDefault();
+
+            //    if (a != null && a.DueDate.Value.ToShortDateString() == DateTime.Today.ToShortDateString())
+            //        filtered.Add(det);
+            //}
+            return q1.ToList();
+         
+        }
+
+
     }
 
     public class CustomerInfo
@@ -320,5 +351,11 @@ namespace DataAccessLayer
     {
         public string Store { get; set; }
         public int count { get; set; }
+    }
+    public class ShirtInfo
+    {
+        public int invoiceID { get; set; }
+        public string articleID { get; set; }
+        public DateTime? dueDate { get; set; }
     }
 }

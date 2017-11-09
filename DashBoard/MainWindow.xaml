@@ -37,7 +37,7 @@
                     <ColumnDefinition Width="600"></ColumnDefinition>
                     <ColumnDefinition Width="600"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ScrollViewer    Grid.Column="0" Name="Results" Background="Black"  />
+                <ScrollViewer    Grid.Column="0" Name="Results" Background="white"  />
                 <ScrollViewer    Grid.Column="1" Name="Results1" Background="Bisque"  />
             </Grid>
          

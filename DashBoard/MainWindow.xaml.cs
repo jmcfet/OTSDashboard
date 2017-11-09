@@ -91,10 +91,9 @@ namespace DashBoard
         public List<missingPieceInfo> missing;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            
-         
-            //Results.Content = new DbQuerys();
-            //Results1.Content = new cpr();
+
+           
+           Results.Content = new DbQuerys();
             //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
 
             //OTSAccess dal = new OTSAccess(StoreConnectionString);
@@ -104,12 +103,12 @@ namespace DashBoard
             //System.Collections.ObjectModel.ObservableCollection<Category> cats = dal.GetCats(out error);
 
             //     string basedir = System.AppDomain.CurrentDomain.BaseDirectory;
-
-            NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "BCS.exe", bcs);
-            NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "qcs.exe", qcs);
-            NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", sch);
-            WebBrowserHelper.ClearCache();
-            //wbSample.Navigate("http://192.168.1.3");
+            
+            //NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "BCS.exe", bcs);
+            //NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "qcs.exe", qcs);
+            //NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", sch);
+            //WebBrowserHelper.ClearCache();
+            ////wbSample.Navigate("http://192.168.1.3");
             //HideScriptErrors(wbSample, true);
       //      NewAppFrame(@"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\", "qcs.exe", test3);
             //       ToDay.Text = DateTime.Now.ToLongDateString();
