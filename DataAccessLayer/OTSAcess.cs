@@ -304,9 +304,6 @@ namespace DataAccessLayer
                      where inv.GarmentID == 100 || inv.GarmentID == 345
                      join auto in assembly.AutoSorts on inv.ArticleCode equals auto.ArticleCode
                      where DbFunctions.TruncateTime(auto.DueDate) == DateTime.Today
-                     //       from auto in assembly.AutoSorts
-                     //       where inv.InvDetailID == auto.InvoiceID
-                     ////       && auto.DueDate == DateTime.Now
                      select new ShirtInfo { articleID = inv.ArticleCode , invoiceID = inv.InvoiceID, dueDate = auto.DueDate};
 
             //var q3 = from inv in assembly.InvoiceDetails

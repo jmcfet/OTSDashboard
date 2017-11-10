@@ -28,15 +28,17 @@ namespace DashBoard
         }
         List<ShirtInfo> shirtsNotDone;
         List<missingPieceInfo> missingorders;
+        List<CustomerInfo> cprInfo;
         private void Dbresults_Loaded(object sender, RoutedEventArgs e)
         {
             OTSAccess dal = new OTSAccess();
-           
+     
              shirtsNotDone = dal.getShirtCount();
             shirts.Content = string.Format("Shirts {0}", shirtsNotDone.Count);
             missingorders = dal.FindMissingOrders("test");
             missing.Content = string.Format("missing {0}", missingorders.Count);
-            //  data.ItemsSource = dal.FindMissingOrders("test");
+            cprInfo =   dal.getCPRCounts();
+            cpr.Content = string.Format("CPR {0}", cprInfo.Count);
         }
 
         private void shirts_Click(object sender, RoutedEventArgs e)
@@ -47,6 +49,11 @@ namespace DashBoard
         private void missing_Click(object sender, RoutedEventArgs e)
         {
             details.ItemsSource = missingorders;
+        }
+
+        private void cpr_Click(object sender, RoutedEventArgs e)
+        {
+            details.ItemsSource = cprInfo;
         }
     }
 }
