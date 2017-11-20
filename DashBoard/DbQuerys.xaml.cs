@@ -23,6 +23,7 @@ namespace DashBoard
     /// </summary>
     public partial class DbQuerys : UserControl
     {
+        System.Timers.Timer timer;
         public DbQuerys()
         {
             InitializeComponent();
@@ -36,38 +37,64 @@ namespace DashBoard
         private void Dbresults_Loaded(object sender, RoutedEventArgs e)
         {
 
-            
+            GetResults();
             ShowResults();
-            Timer timer = new Timer(Timer_Tick,null,0,1000);
-           
+            timer = new System.Timers.Timer();
+            timer.Elapsed += Timer_Tick;
+            timer.Interval = 1000;
+            timer.Start();
 
         }
 
 
-        private void Timer_Tick(object sender)
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            Application.Current.Dispatcher.Invoke(
-                DispatcherPriority.SystemIdle,
-                new Action(()=>
-                {
-                    ShowResults();
-                    last.Content = string.Format("update {0}", DateTime.Now.ToShortTimeString());
-                }));
-        }
+            bool bFree = true;
+            if (bFree)
+            {
+                bFree = false;
+                GetResults();
+                Application.Current.Dispatcher.Invoke(
+                    DispatcherPriority.SystemIdle,
+                    new Action(() =>
+                    {
 
-        void ShowResults()
+                        ShowResults();
+                        last.Content = string.Format("update {0}", DateTime.Now.ToShortTimeString());
+                        bFree = true;
+                    }));
+               
+            }
+        }
+        void GetResults()
         {
             shirtsNotDone = dal.getItemCount("Shirts");
-            shirts.Content = string.Format("Shirts {0}", shirtsNotDone.Count);
+           
             topsNotDone = dal.getItemCount("tops");
-            tops.Content = string.Format("tops {0}", topsNotDone.Count);
+            
             bottomsNotDone = dal.getItemCount("bottoms");
-            bottoms.Content = string.Format("bottoms {0}", bottomsNotDone.Count);
+           
             houseHolds = dal.getItemCount("Household");
-            households.Content = string.Format("Household {0}", houseHolds.Count);
+           
             missingorders = dal.FindMissingOrders("test");
-            missing.Content = string.Format("missing {0}", missingorders.Count);
+            
             cprInfo = dal.getCPRCounts();
+            
+
+        }
+        void ShowResults()
+        {
+            
+            shirts.Content = string.Format("Shirts {0}", shirtsNotDone.Count);
+            
+            tops.Content = string.Format("tops {0}", topsNotDone.Count);
+            
+            bottoms.Content = string.Format("bottoms {0}", bottomsNotDone.Count);
+            
+            households.Content = string.Format("Household {0}", houseHolds.Count);
+            
+            missing.Content = string.Format("missing {0}", missingorders.Count);
+           
             cpr.Content = string.Format("CPR {0}", cprInfo.Count);
 
         }
