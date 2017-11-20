@@ -101,14 +101,7 @@ namespace DashBoard
             //data.ItemsSource = missing;
             //string error = string.Empty;
             //System.Collections.ObjectModel.ObservableCollection<Category> cats = dal.GetCats(out error);
-
-            string basedir = @"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\";
-
-            NewAppFrame(basedir, "BCS.exe", bcs);
-            NewAppFrame(basedir, "qcs.exe", qcs);
-            NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", sch);
-            WebBrowserHelper.ClearCache();
-            //wbSample.Navigate("http://192.168.1.3");
+    //wbSample.Navigate("http://192.168.1.3");
             //HideScriptErrors(wbSample, true);
           }
 

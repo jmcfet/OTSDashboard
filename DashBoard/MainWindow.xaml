@@ -6,44 +6,7 @@
         xmlns:local="clr-namespace:DashBoard"
         mc:Ignorable="d"
       >
-    <ScrollViewer>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="1000"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="600"></RowDefinition>
-                <RowDefinition Height="400"></RowDefinition>
-               
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Visibility="Visible">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="9*"></ColumnDefinition>
-                    <ColumnDefinition Width="7*"></ColumnDefinition>
-                    <ColumnDefinition Width="9*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <DockPanel  Grid.Row="0"  Grid.Column="0" Name="bcs"  Background="AliceBlue" />
-                    <DockPanel  Grid.Row="0"  Grid.Column="1" Name="sch"  Background="AliceBlue" >
-                        <!--<WebBrowser Name="wbSample" Navigating="wbSample_Navigating"></WebBrowser>-->
-                    </DockPanel>
-                    <DockPanel  Grid.Row="0"  Grid.Column="2" Name="qcs"  Background="AliceBlue" />
-                
-            </Grid>
-            <Grid Grid.Row="1" Background="Aquamarine">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="600"></ColumnDefinition>
-                    <ColumnDefinition Width="600"></ColumnDefinition>
-                    <ColumnDefinition Width="600"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <ScrollViewer    Grid.Column="0" Name="Results" Background="white"  />
-                <ScrollViewer    Grid.Column="1" Name="Results1" Background="Bisque"  />
-            </Grid>
-         
-        </Grid>
-       
-       
-    </Grid>
-    </ScrollViewer>
+   
+       <ScrollViewer    Grid.Column="0" Name="Results" Background="white"  />
+     
 </Window>

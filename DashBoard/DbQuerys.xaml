@@ -8,13 +8,17 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="60" Margin="10,34,0,0" VerticalAlignment="Top" Width="280" Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Center" Height="60" Margin="10,34,0,0" VerticalAlignment="Top"  Orientation="Horizontal">
         <Button Name="cpr" Content="CPR " Margin="0,0,10,0" Click="cpr_Click"/>
         <Button  Name="missing" Content="Missing" Margin="0,0,10,0" Click="missing_Click"/>
-        
-        <Button Name="shirts" Content="Shirts" Click="shirts_Click"/>
-    </StackPanel>
-    <DataGrid Name="details"  HorizontalAlignment="Left" Width="290" Height="200"  Margin="0,10"/>
+
+                <Button Name="shirts" Content="Shirts"  Margin="0,0,10,0" Click="shirts_Click"/>
+                <Button Name="bottoms" Content="bottoms" Margin="0,0,10,0" Click="bottoms_Click"/>
+                <Button Name="tops" Content="tops" Margin="0,0,10,0" Click="tops_Click"/>
+                <Button Name="households"  Margin="0,0,10,0" Click="house_Click"/>
+                <Label Name="last"  Height="50" Width="170" />
+            </StackPanel>
+    <DataGrid Name="details"  HorizontalAlignment="Center" Width="600" Height="600"  Margin="0,10"/>
         </StackPanel>
     </Grid>
 </UserControl>
