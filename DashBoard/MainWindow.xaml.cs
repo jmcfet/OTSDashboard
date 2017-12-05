@@ -91,9 +91,10 @@ namespace DashBoard
         public List<missingPieceInfo> missing;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
            
-           Results.Content = new DbQuerys();
+            //OTSAccess dal = new OTSAccess();
+            //dal.SaveFabIdtoCatId(Import(4));
+             Results.Content = new DbQuerys();
             //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
 
             //OTSAccess dal = new OTSAccess(StoreConnectionString);
@@ -101,9 +102,9 @@ namespace DashBoard
             //data.ItemsSource = missing;
             //string error = string.Empty;
             //System.Collections.ObjectModel.ObservableCollection<Category> cats = dal.GetCats(out error);
-    //wbSample.Navigate("http://192.168.1.3");
+            //wbSample.Navigate("http://192.168.1.3");
             //HideScriptErrors(wbSample, true);
-          }
+        }
 
         void NewAppFrame(string basedir,string exe, DockPanel panel)
         {
@@ -180,6 +181,71 @@ namespace DashBoard
             //base.OnClosing(e);
             //this.WindowState = System.Windows.WindowState.Minimized;
             //e.Cancel = true;
+        }
+        private List<OTISIdsToFabId> Import(int sheet)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook = xlApp.Workbooks.Open(@"C:\Intel\test.xlsx", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(sheet);
+
+            Microsoft.Office.Interop.Excel.Range range = xlWorkSheet.UsedRange;
+            int rw = range.Rows.Count;
+            int cl = range.Columns.Count;
+            List<OTISIdsToFabId> listObjs = new List<OTISIdsToFabId>();
+            OTISIdsToFabId obj = null;
+
+            for (int rCnt = 1; rCnt <= rw; rCnt++)
+            {
+                for (int cCnt = 1; cCnt <= cl; cCnt++)
+                {
+                    if (rCnt == 1)
+                    {
+                       
+                        string str = (string)(range.Cells[rCnt, cCnt] as Microsoft.Office.Interop.Excel.Range).Value2;
+                        if (str == null)
+                            continue;
+                        
+                    }
+                    else
+                    {
+                        if (cCnt == 1)
+                        {
+                            obj = new OTISIdsToFabId();
+                            double? stest8 = (double?)(range.Cells[rCnt, cCnt] as Microsoft.Office.Interop.Excel.Range).Value2;
+                            if (stest8 != null)
+                            {
+                                obj.FabID = (int)stest8;
+                            }
+                            
+                        }
+                        
+                        if (cCnt == 2)
+                        {
+                            obj.Description = (string)(range.Cells[rCnt, cCnt] as Microsoft.Office.Interop.Excel.Range).Value2;
+                        }
+                        if (cCnt == 3)
+                        {
+                            obj.PriceTable =  (string)(range.Cells[rCnt, cCnt] as Microsoft.Office.Interop.Excel.Range).Value2;
+                             
+                            
+                        }
+                        if (cCnt == 4)
+                        {
+                            double? stest8 = (double?)(range.Cells[rCnt, cCnt] as Microsoft.Office.Interop.Excel.Range).Value2;
+
+                            if (stest8 != null)
+                            {
+                                obj.CatID = (int)stest8;
+                            }
+                            if (obj.FabID > 0)
+                                listObjs.Add(obj);
+                        }
+
+                    }
+
+                }
+            }
+            return listObjs;
         }
     }
 }

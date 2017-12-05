@@ -303,7 +303,7 @@ namespace DataAccessLayer
             DataAccessLayer.AssemblyDB.Assembly assembly = new DataAccessLayer.AssemblyDB.Assembly();
             List<int> ids = (from cat in dbBCS.Categories
                              where cat.Name == type
-                             join fab in dbBCS.OTSIDtoFABs on cat.ID equals fab.CatID
+                             join fab in dbBCS.OTISIdsToFabIds on cat.ID equals fab.CatID
                              select fab.FabID).ToList();
 
             var q1 = from inv in assembly.InvoiceDetails
@@ -334,6 +334,12 @@ namespace DataAccessLayer
             }
 
             return gids;
+        }
+        public void SaveFabIdtoCatId(List<OTISIdsToFabId> objs)
+        {
+            
+            dbBCS.OTISIdsToFabIds.AddRange(objs);
+            dbBCS.SaveChanges();
         }
     }
     public class CustomerInfo

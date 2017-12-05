@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BCSDb\Appointment.cs" />
     <Compile Include="AssemblyDB\Alert.cs" />
     <Compile Include="AssemblyDB\AssemAutoNumber.cs" />
     <Compile Include="AssemblyDB\Assembly.cs" />
@@ -64,23 +63,24 @@
     <Compile Include="AssemblyDB\Location.cs" />
     <Compile Include="AssemblyDB\StorageInvoice.cs" />
     <Compile Include="AssemblyDB\Version.cs" />
+    <Compile Include="BCSDb\Appointment.cs" />
     <Compile Include="BCSDb\BCSContext.cs" />
     <Compile Include="BCSDb\Bin.cs" />
     <Compile Include="BCSDb\Category.cs" />
     <Compile Include="BCSDb\Configuration.cs" />
     <Compile Include="BCSDb\CPR.cs" />
-    <Compile Include="Data\Repository.cs" />
     <Compile Include="BCSDb\GSS.cs" />
-    <Compile Include="Item.cs" />
+    <Compile Include="BCSDb\Item.cs" />
+    <Compile Include="BCSDb\OTISIdsToFabId.cs" />
+    <Compile Include="BCSDb\Printer.cs" />
+    <Compile Include="BCSDb\QCSInfo.cs" />
+    <Compile Include="Data\Repository.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Appointments.cs" />
     <Compile Include="Models\BindableObject.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="OTSAcess.cs" />
-    <Compile Include="BCSDb\OTSIDtoFAB.cs" />
-    <Compile Include="BCSDb\Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BCSDb\QCSInfo.cs" />
     <Compile Include="StoreDB\AppliedCr.cs" />
     <Compile Include="StoreDB\AutoNumber.cs" />
     <Compile Include="StoreDB\BillCyclePeriod.cs" />

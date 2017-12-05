@@ -6,8 +6,7 @@ namespace DataAccessLayer
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("OTSIDtoFAB")]
-    public partial class OTSIDtoFAB
+    public partial class OTISIdsToFabId
     {
         public int id { get; set; }
 
@@ -16,5 +15,8 @@ namespace DataAccessLayer
         public int FabID { get; set; }
 
         public string Description { get; set; }
+
+        [StringLength(50)]
+        public string PriceTable { get; set; }
     }
 }
