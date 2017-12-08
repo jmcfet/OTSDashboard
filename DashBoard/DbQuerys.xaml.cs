@@ -33,6 +33,7 @@ namespace DashBoard
         List<missingPieceInfo> missingorders;
         List<CustomerInfo> cprInfo;
         List<GarmentIds> gids;
+        List<OrdersLostOnRacktoMissingRackLocationData> missingOnrrack;
         OTSAccess dal = new OTSAccess();
         private void Dbresults_Loaded(object sender, RoutedEventArgs e)
         {
@@ -79,7 +80,7 @@ namespace DashBoard
             missingorders = dal.FindMissingOrders("test");
             
             cprInfo = dal.getCPRCounts();
-            
+            missingOnrrack = dal.OrdersLostOnRacktoMissingRackLocation();
 
         }
         void ShowResults()
@@ -96,6 +97,7 @@ namespace DashBoard
             missing.Content = string.Format("missing {0}", missingorders.Count);
            
             cpr.Content = string.Format("CPR {0}", cprInfo.Count);
+            Missingonrack.Content = string.Format("rackmissing {0}", missingOnrrack.Count);
 
         }
         private void shirts_Click(object sender, RoutedEventArgs e)
@@ -124,6 +126,10 @@ namespace DashBoard
         private void cpr_Click(object sender, RoutedEventArgs e)
         {
             details.ItemsSource = cprInfo;
+        }
+        private void Missingonrack_Click(object sender, RoutedEventArgs e)
+        {
+            details.ItemsSource = missingOnrrack;
         }
 
         //private void Garments_Click(object sender, RoutedEventArgs e)

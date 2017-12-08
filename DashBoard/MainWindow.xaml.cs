@@ -91,9 +91,10 @@ namespace DashBoard
         public List<missingPieceInfo> missing;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           
-            //OTSAccess dal = new OTSAccess();
+
+          // OTSAccess dal = new OTSAccess();
             //dal.SaveFabIdtoCatId(Import(4));
+        //    dal.OrdersLostOnRacktoMissingRackLocation();
              Results.Content = new DbQuerys();
             //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
 

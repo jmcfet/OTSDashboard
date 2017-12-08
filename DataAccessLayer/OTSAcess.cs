@@ -297,7 +297,45 @@ namespace DataAccessLayer
             return invinfo;
 
         }
+        // find orders lost on the conveyor due to a missing rack location.
+        public List<OrdersLostOnRacktoMissingRackLocationData> OrdersLostOnRacktoMissingRackLocation()
+        {
+            StoreContext[] connectStrings = new StoreContext[4];
+            ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
+            string StoreConnectionString = connections["StoreContext"].ConnectionString;
+            StoreContext CurrentContext = null; 
+            connectStrings[0] = new StoreContext(StoreConnectionString);
+            //      List<Invoice> invs = assembly.Invoices.Take(10).ToList();
+            StoreConnectionString = connections["Store2Context"].ConnectionString;
+            connectStrings[1] = new StoreContext(StoreConnectionString);
+            StoreConnectionString = connections["Store3Context"].ConnectionString;
+            connectStrings[2] = new StoreContext(StoreConnectionString);
+            StoreConnectionString = connections["Store4Context"].ConnectionString;
+            connectStrings[3] = new StoreContext(StoreConnectionString);
+            List<OrdersLostOnRacktoMissingRackLocationData> ListData = new List<OrdersLostOnRacktoMissingRackLocationData>();
+            for (int i = 0; i < 4; i++)
+            {
+                CurrentContext = connectStrings[i];
+                DateTime prev = DateTime.Today.AddDays(-7);
+                var invs = from inv in CurrentContext.Invoices
+                         where DbFunctions.TruncateTime(inv.DueDate) >= prev
+                         && inv.Rack == null && inv.DepartmentID != 5 && inv.PaidAmount != 0
+                         select inv;
+                foreach(Invoice inv in invs)
+                {
+                    OrdersLostOnRacktoMissingRackLocationData data = new OrdersLostOnRacktoMissingRackLocationData()
+                    {
+                        dueDate = inv.DueDate,
+                        invoiceID = inv.InvoiceID,
+                        storeID = i
+                    };
+                    ListData.Add(data);
 
+                }
+           
+            }
+            return ListData;
+        }
         public List<ShirtInfo> getItemCount(string type)
         {
             DataAccessLayer.AssemblyDB.Assembly assembly = new DataAccessLayer.AssemblyDB.Assembly();
@@ -376,5 +414,11 @@ namespace DataAccessLayer
         public int garmentID { get; set; }
         public string desc { get; set; }
       
+    }
+    public class OrdersLostOnRacktoMissingRackLocationData
+    {
+        public int invoiceID { get; set; }
+        public int storeID { get; set; }
+        public DateTime? dueDate { get; set; }
     }
 }
