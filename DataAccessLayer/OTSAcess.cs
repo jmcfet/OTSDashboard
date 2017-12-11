@@ -262,19 +262,21 @@ namespace DataAccessLayer
                                 storeid = inv.StoreID,
                                 date = inv.InvoiceDate.ToString()
                             };
-                            //before we make this as an error, the clerk might have generated another invoice for this order to make up for
-                            //an error on their part so check if there are multiple invoices for this order
+                            //before we mark this as an error, the clerk might have generated another invoice for this order to make up for
+                            //an error on their part so check if there are multiple invoices for this customer
                             List<AssemblyDB.Invoice> inerror = (from inv1 in allInvoices
-                                                                where inv1.OrderID == AssemblyInvGroup.Key
+                                                                where inv1.CustomerID == inv.CustomerID
 
                                                                 select inv1).ToList();
-                            if (inerror.Count > 1)
+                            if (inerror.Count > 1)  //must be more than one to bother checking
                             {
                                 int TotalCount = (int)inerror.Sum(o => o.Pieces);
                                 if (TotalCount != piecesInOrders)
                                     miss.Add(info);
 
                             }
+                            else
+                                miss.Add(info);
 
 
                         }
