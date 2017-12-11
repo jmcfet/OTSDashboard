@@ -138,15 +138,15 @@ namespace DataAccessLayer
                      join cust in dbOTS.Customers on inv.CustomerID equals cust.CustomerID
                      select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
 
-            var q2 = from cust in dbOTS.Customers
+            var ordersGroup = from cust in dbOTS.Customers
                      where cust.InvReminder != null
                      join invoice in dbOTS.Invoices on cust.CustomerID equals invoice.CustomerID
                      where invoice.PickupDate == null && invoice.Rack != null && invoice.Rack.ToLower() != "bagged"
                      select new CustomerInfo() { FirstName = cust.FirstName, LastName = cust.LastName, rack = invoice.Rack, invoiceID = invoice.InvoiceID, invmemo = cust.InvReminder, baggermemo = invoice.BaggerMemo };
 
-            //     string test = ((ObjectQuery)q2).ToTraceString();
+            //     string test = ((ObjectQuery)ordersGroup).ToTraceString();
 
-            List<CustomerInfo> invinfo = q1.Union(q2).ToList();   //remove duplicates
+            List<CustomerInfo> invinfo = q1.Union(ordersGroup).ToList();   //remove duplicates
 
             //now get all the processed invoices that passed
             List<int> processed = (from c in dbBCS.CPRs
@@ -214,19 +214,20 @@ namespace DataAccessLayer
             db3OTS = new StoreContext(StoreConnectionString);
             StoreConnectionString = connections["Store4Context"].ConnectionString;
             db4OTS = new StoreContext(StoreConnectionString);
-            List<DataAccessLayer.AssemblyDB.Invoice> invs = assembly.Invoices.Take(10).ToList();
+
             List<missingPieceInfo> miss = new List<missingPieceInfo>();
             DateTime prev = DateTime.Today.AddDays(-1);
-            var q1 = from inv in assembly.Invoices
-                     where DbFunctions.TruncateTime(inv.InvoiceDate) >= prev
+            List<DataAccessLayer.AssemblyDB.Invoice> allInvoices = (from inv in assembly.Invoices
+                                                                    where DbFunctions.TruncateTime(inv.InvoiceDate) >= prev
+                                                                    select inv).ToList();
 
-                     group inv by inv.OrderID into groupedinvs
-                     select groupedinvs;
-
-
-            foreach (var group1 in q1)
+           
+             var invsGroupedByOrderID  = from inv2 in allInvoices
+                                                group inv2 by inv2.OrderID into groupedinvs
+                                                select groupedinvs;
+            foreach (var AssemblyInvGroup in invsGroupedByOrderID)
             {
-                int storeid = group1.First().StoreID;
+                int storeid = AssemblyInvGroup.First().StoreID;
                 dbOTS = db1OTS;
                 switch (storeid)
                 {
@@ -240,28 +241,42 @@ namespace DataAccessLayer
                         dbOTS = db4OTS;
                         break;
                 }
-                //             Debug.WriteLine("invoice " + group1.Name);
-                var q2 = from order in dbOTS.OrderDetails
-                         where group1.Key == order.OrderID
+              
+                var ordersGroup = from order in dbOTS.OrderDetails
+                         where AssemblyInvGroup.Key == order.OrderID
                          group order by order.OrderID into groupedby
                          select groupedby;
-                if (q2.Count() > 0)
+                if (ordersGroup.Count() > 0)
                 {
-                    foreach (var group in q2)
+                    foreach (var group in ordersGroup)
                     {
-                        int num = (int)group.Sum(o => o.Pieces);
-                        DataAccessLayer.AssemblyDB.Invoice inv = group1.First();
-                        if (group.Sum(o => o.Pieces) != group1.Sum(i => i.Pieces))
+                        int piecesInOrders = (int)group.Sum(o => o.Pieces);
+                        DataAccessLayer.AssemblyDB.Invoice inv = AssemblyInvGroup.First();
+                        if (group.Sum(o => o.Pieces) != AssemblyInvGroup.Sum(i => i.Pieces))
                         {
                             missingPieceInfo info = new missingPieceInfo()
                             {
-                                orderid = group1.Key,
-                                numInvoiced = (int)group1.Sum(i => i.Pieces),
-                                numOrders = num,
+                                orderid = AssemblyInvGroup.Key,
+                                numInvoiced = (int)AssemblyInvGroup.Sum(i => i.Pieces),
+                                numOrders = piecesInOrders,
                                 storeid = inv.StoreID,
                                 date = inv.InvoiceDate.ToString()
                             };
-                            miss.Add(info);
+                            //before we make this as an error, the clerk might have generated another invoice for this order to make up for
+                            //an error on their part so check if there are multiple invoices for this order
+                            List<AssemblyDB.Invoice> inerror = (from inv1 in allInvoices
+                                                                where inv1.OrderID == AssemblyInvGroup.Key
+
+                                                                select inv1).ToList();
+                            if (inerror.Count > 1)
+                            {
+                                int TotalCount = (int)inerror.Sum(o => o.Pieces);
+                                if (TotalCount != piecesInOrders)
+                                    miss.Add(info);
+
+                            }
+
+
                         }
                     }
 
