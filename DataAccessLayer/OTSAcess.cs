@@ -333,13 +333,16 @@ namespace DataAccessLayer
             for (int i = 0; i < 4; i++)
             {
                 CurrentContext = connectStrings[i];
-                DateTime prev = DateTime.Today.AddDays(-7);
+                DateTime prev = DateTime.Today.AddDays(-7).Date;
                 var invs = from inv in CurrentContext.Invoices
-                         where DbFunctions.TruncateTime(inv.DueDate) >= prev
-                         && inv.Rack == null && inv.DepartmentID != 5 && inv.PaidAmount != 0
-                         select inv;
+                           where DbFunctions.TruncateTime(inv.DueDate) >= prev.Date
+                           && inv.Rack == null && inv.DepartmentID != 5 && inv.PaidAmount == 0
+                           select inv;
+               
                 foreach(Invoice inv in invs)
                 {
+                   
+                   
                     OrdersLostOnRacktoMissingRackLocationData data = new OrdersLostOnRacktoMissingRackLocationData()
                     {
                         dueDate = inv.DueDate,
