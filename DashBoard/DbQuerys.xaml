@@ -9,8 +9,8 @@
     <Grid>
         <StackPanel>
         <StackPanel HorizontalAlignment="Center" Height="60" Margin="10,34,0,0" VerticalAlignment="Top"  Orientation="Horizontal">
-        <Button Name="cpr" Content="CPR " Margin="0,0,10,0" Click="cpr_Click"/>
-        <Button  Name="missing" Content="Missing" Margin="0,0,10,0" Click="missing_Click"/>
+                <Button Name="cpr" Content="CPR " Margin="0,0,10,0" Click="button_Click"/>
+                <Button  Name="missing" Content="Missing" Margin="0,0,10,0" Click="button_Click"/>
 
                 <Button Name="shirts" Content="Shirts"  Margin="0,0,10,0" Click="button_Click"/>
                 <Button Name="bottoms" Content="bottoms" Margin="0,0,10,0" Click="button_Click"/>

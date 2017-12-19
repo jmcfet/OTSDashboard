@@ -144,27 +144,13 @@ namespace DashBoard
                     case "rackmissing":
                         DisplayDetails(missingorders);
                         break;
-               
+                case "CPR":
+                    DisplayDetails(cprInfo);
+                    break;
+
             }
         }
-    private void bottoms_Click(object sender, RoutedEventArgs e)
-        {
-            details.ItemsSource = bottomsNotDone;
-        }
-        private void tops_Click(object sender, RoutedEventArgs e)
-        {
-            details.ItemsSource = topsNotDone;
-        }
-        private void house_Click(object sender, RoutedEventArgs e)
-        {
-            details.ItemsSource = houseHolds;
-        }
-
-        private void missing_Click(object sender, RoutedEventArgs e)
-        {
-            details.ItemsSource = missingorders;
-        }
-
+   
         private void cpr_Click(object sender, RoutedEventArgs e)
         {
             details.ItemsSource = cprInfo;
