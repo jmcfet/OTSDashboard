@@ -78,7 +78,13 @@
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Appointments.cs" />
     <Compile Include="Models\BindableObject.cs" />
+    <Compile Include="Models\CPRCounts.cs" />
+    <Compile Include="Models\CustomerInfo.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\GarmentIds.cs" />
+    <Compile Include="Models\missingPieceInfo.cs" />
+    <Compile Include="Models\OrdersLostOnRacktoMissingRackLocationData.cs" />
+    <Compile Include="Models\ShirtInfo.cs" />
     <Compile Include="OTSAcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreDB\AppliedCr.cs" />

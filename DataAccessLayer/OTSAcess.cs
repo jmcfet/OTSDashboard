@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.StoreDB;
+﻿
+using DataAccessLayer.Models;
+using DataAccessLayer.StoreDB;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -400,45 +402,10 @@ namespace DataAccessLayer
             dbBCS.SaveChanges();
         }
     }
-    public class CustomerInfo
-    {
-        public string storeName { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string rack { get; set; }
-        public int invoiceID { get; set; }
-        public string baggermemo { get; set; }
-        public string invmemo { get; set; }
-    }
-    public class missingPieceInfo
-    {
-        public int orderid { get; set; }
-        public int numInvoiced { get; set; }
-        public int numOrders { get; set; }
-        public int storeid { get; set; }
-        public string date { get; set; }
-    }
-    public class CPRCounts
-    {
-        public string Store { get; set; }
-        public int count { get; set; }
-    }
-    public class ShirtInfo
-    {
-        public int invoiceID { get; set; }
-        public string articleID { get; set; }
-        public DateTime? dueDate { get; set; }
-    }
-    public class GarmentIds
-    {
-        public int garmentID { get; set; }
-        public string desc { get; set; }
-      
-    }
-    public class OrdersLostOnRacktoMissingRackLocationData
-    {
-        public int invoiceID { get; set; }
-        public int storeID { get; set; }
-        public DateTime? dueDate { get; set; }
-    }
+    
+    
+    
+    
+    
+   
 }

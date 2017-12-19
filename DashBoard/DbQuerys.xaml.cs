@@ -1,5 +1,8 @@
-﻿using DataAccessLayer;
+﻿
+using DataAccessLayer;
+using DataAccessLayer.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,15 +37,19 @@ namespace DashBoard
         List<CustomerInfo> cprInfo;
         List<GarmentIds> gids;
         List<OrdersLostOnRacktoMissingRackLocationData> missingOnrrack;
+        
         OTSAccess dal = new OTSAccess();
+        private Object thisLock = new Object();
+        string lastDisplayed;
+
         private void Dbresults_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
             GetResults();
             ShowResults();
             timer = new System.Timers.Timer();
             timer.Elapsed += Timer_Tick;
-            timer.Interval = 1000;
+            timer.Interval = 2000;
             timer.Start();
 
         }
@@ -50,10 +57,8 @@ namespace DashBoard
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            bool bFree = true;
-            if (bFree)
+            lock (thisLock)
             {
-                bFree = false;
                 GetResults();
                 Application.Current.Dispatcher.Invoke(
                     DispatcherPriority.SystemIdle,
@@ -62,14 +67,16 @@ namespace DashBoard
 
                         ShowResults();
                         last.Content = string.Format("update {0}", DateTime.Now.ToShortTimeString());
-                        bFree = true;
+                        if (lastDisplayed != null )
+                            ShowDetails();
                     }));
-               
             }
+            
         }
         void GetResults()
         {
             shirtsNotDone = dal.getItemCount("Shirts");
+          
            
             topsNotDone = dal.getItemCount("tops");
             
@@ -88,8 +95,10 @@ namespace DashBoard
             
             shirts.Content = string.Format("Shirts {0}", shirtsNotDone.Count);
             
+            
             tops.Content = string.Format("tops {0}", topsNotDone.Count);
             
+
             bottoms.Content = string.Format("bottoms {0}", bottomsNotDone.Count);
             
             households.Content = string.Format("Household {0}", houseHolds.Count);
@@ -100,12 +109,45 @@ namespace DashBoard
             Missingonrack.Content = string.Format("rackmissing {0}", missingOnrrack.Count);
 
         }
-        private void shirts_Click(object sender, RoutedEventArgs e)
+    
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-           
-            details.ItemsSource = shirtsNotDone;
+            Button but = sender as Button;
+            string content = but.Content.ToString();
+            lastDisplayed = content.Split(' ')[0];
+            timer.Stop();
+            ShowDetails();
+            timer.Start();
+            //   details.ItemsSource = shirtsNotDone;
+
         }
-        private void bottoms_Click(object sender, RoutedEventArgs e)
+        void ShowDetails()
+        {
+            
+                switch (lastDisplayed)
+                {
+                    case "Shirts":
+                        DisplayDetails(shirtsNotDone);
+                        break;
+                    case "tops":
+                        DisplayDetails(topsNotDone);
+                        break;
+                    case "bottoms":
+                        DisplayDetails(bottomsNotDone);
+                        break;
+                    case "Household":
+                        DisplayDetails(houseHolds);
+                        break;
+                    case "missing":
+                        DisplayDetails(missingorders);
+                        break;
+                    case "rackmissing":
+                        DisplayDetails(missingorders);
+                        break;
+               
+            }
+        }
+    private void bottoms_Click(object sender, RoutedEventArgs e)
         {
             details.ItemsSource = bottomsNotDone;
         }
@@ -130,8 +172,15 @@ namespace DashBoard
         private void Missingonrack_Click(object sender, RoutedEventArgs e)
         {
             details.ItemsSource = missingOnrrack;
+           
         }
-
+       
+        void DisplayDetails<T>(List<T> list)
+        {
+          
+            details.ItemsSource = list;
+            
+        }
         //private void Garments_Click(object sender, RoutedEventArgs e)
         //{
         //    details.ItemsSource = gids;
