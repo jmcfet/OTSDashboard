@@ -142,7 +142,7 @@ namespace DashBoard
                         DisplayDetails(missingorders);
                         break;
                     case "rackmissing":
-                        DisplayDetails(missingorders);
+                        DisplayDetails(missingOnrrack);
                         break;
                 case "CPR":
                     DisplayDetails(cprInfo);
