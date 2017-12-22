@@ -287,8 +287,8 @@ namespace DataAccessLayer
 
                 }
             }
-            miss.OrderBy(d => d.date);
-            return miss;
+           
+            return miss.OrderBy(o => o.storeid).ToList(); ;
         }
 
         private List<CustomerInfo> FindInvoicesToCheck(string storeName)
@@ -356,7 +356,7 @@ namespace DataAccessLayer
                 }
            
             }
-            return ListData;
+            return ListData.OrderBy(o=>o.storeID).ToList();
         }
         public List<ShirtInfo> getItemCount(string type)
         {
