@@ -388,7 +388,7 @@ namespace DataAccessLayer
             var q1 = from inv in assembly.InvoiceDetails
                      where ids.Contains(inv.GarmentID)
                      join auto in assembly.AutoSorts on inv.ArticleCode equals auto.ArticleCode
-                     where DbFunctions.TruncateTime(auto.DueDate) == DateTime.Today
+                     where DbFunctions.TruncateTime(auto.DueDate) == DateTime.Today && auto.Status == "R"
                      select new ShirtInfo { articleID = inv.ArticleCode, invoiceID = inv.InvoiceID, dueDate = auto.DueDate };
 
            
