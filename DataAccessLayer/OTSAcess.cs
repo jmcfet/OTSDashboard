@@ -218,15 +218,18 @@ namespace DataAccessLayer
             db4OTS = new StoreContext(StoreConnectionString);
 
             List<missingPieceInfo> miss = new List<missingPieceInfo>();
-            DateTime prev = DateTime.Today.AddDays(-1);
+            List<missingPieceInfo> missFilteredbyCustomerid = new List<missingPieceInfo>();
+            
+            //get all invoices for the last day
             List<DataAccessLayer.AssemblyDB.Invoice> allInvoices = (from inv in assembly.Invoices
-                                                                    where DbFunctions.TruncateTime(inv.InvoiceDate) >= prev
+                                                                    where DbFunctions.TruncateTime(inv.MarkInDate) >= DateTime.Today
                                                                     select inv).ToList();
 
-           
+           //group these by orderid
              var invsGroupedByOrderID  = from inv2 in allInvoices
                                                 group inv2 by inv2.OrderID into groupedinvs
                                                 select groupedinvs;
+            //Invoices are now grouped by orderid so at look at each group of invoices 
             foreach (var AssemblyInvGroup in invsGroupedByOrderID)
             {
                 int storeid = AssemblyInvGroup.First().StoreID;
@@ -243,52 +246,68 @@ namespace DataAccessLayer
                         dbOTS = db4OTS;
                         break;
                 }
-              
+               //find all the orderdetail objects with this orderid and group by orderid
                 var ordersGroup = from order in dbOTS.OrderDetails
                          where AssemblyInvGroup.Key == order.OrderID
                          group order by order.OrderID into groupedby
                          select groupedby;
+
                 if (ordersGroup.Count() > 0)
                 {
-                    foreach (var group in ordersGroup)
+                    
+                    foreach (var orderDetailGroup in ordersGroup)
                     {
-                        int piecesInOrders = (int)group.Sum(o => o.Pieces);
-                        DataAccessLayer.AssemblyDB.Invoice inv = AssemblyInvGroup.First();
-                        if (group.Sum(o => o.Pieces) != AssemblyInvGroup.Sum(i => i.Pieces))
+                       
+                        int piecesInOrderDetails = (int)orderDetailGroup.Sum(o => o.Pieces);
+                        OrderDetail orderDetail = orderDetailGroup.First();
+                        List<AssemblyDB.AutoSort> inAutoPieces = (from auto in assembly.AutoSorts
+                                                             where auto.CustomerID == orderDetail.CustomerID
+                                                             &&  DbFunctions.TruncateTime(auto.InvoiceDate) >= DateTime.Today
+                                                             group auto by auto.ArticleCode  into groupbyarticle
+                                                              select groupbyarticle.FirstOrDefault()).ToList();
+                      
+                        //ignore number pieces mismatch if the item not marked in
+                        if (piecesInOrderDetails != inAutoPieces.Count && inAutoPieces.Count > 0)
                         {
                             missingPieceInfo info = new missingPieceInfo()
                             {
                                 orderid = AssemblyInvGroup.Key,
-                                numInvoiced = (int)AssemblyInvGroup.Sum(i => i.Pieces),
-                                numOrders = piecesInOrders,
-                                storeid = inv.StoreID,
-                                date = inv.InvoiceDate.ToString()
+                                numInvoiced = inAutoPieces.Count.ToString(),
+                                numOrders = piecesInOrderDetails,
+                                storeid = orderDetail.StoreID,
+                                customerid = orderDetail.CustomerID,
+                                date = orderDetail.DueDate.ToString()
                             };
-                            //before we mark this as an error, the clerk might have generated another invoice for this order to make up for
-                            //an error on their part so check if there are multiple invoices for this customer
-                            List<AssemblyDB.Invoice> inerror = (from inv1 in allInvoices
-                                                                where inv1.CustomerID == inv.CustomerID
-
-                                                                select inv1).ToList();
-                            if (inerror.Count > 1)  //must be more than one to bother checking
-                            {
-                                int TotalCount = (int)inerror.Sum(o => o.Pieces);
-                                if (TotalCount != piecesInOrders)
-                                    miss.Add(info);
-
-                            }
-                            else
-                                miss.Add(info);
+                          
+                            miss.Add(info);
 
 
                         }
                     }
-
+                    
 
                 }
             }
-           
-            return miss.OrderBy(o => o.storeid).ToList(); ;
+            //we have the possible mismatches between orderdetails pieces and autosort now group by customerid. there 
+            //might be multiple mismatches for same customer in which case we need to look at group as a whole
+            //
+            var groupedbyCust = miss.GroupBy(g => g.customerid).ToList();
+            foreach (var missGroup in groupedbyCust)
+            {
+                //these customer might have multiple orders 
+                if (missGroup.Count() > 1)
+                {
+                    if ((int)missGroup.Sum(o => o.numOrders) != Int32.Parse(missGroup.First().numInvoiced))
+                    {
+                        missGroup.First().numInvoiced = string.Format("Mult work orders {0}", missGroup.First().numInvoiced);
+                        missFilteredbyCustomerid.Add(missGroup.First());
+                    }
+                }
+                else
+                    missFilteredbyCustomerid.Add(missGroup.First());
+            }
+
+            return missFilteredbyCustomerid.OrderBy(o => o.storeid).ToList(); ;
         }
 
         private List<CustomerInfo> FindInvoicesToCheck(string storeName)
