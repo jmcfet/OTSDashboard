@@ -271,7 +271,7 @@ namespace DataAccessLayer
                         {
                             missingPieceInfo info = new missingPieceInfo()
                             {
-                                orderid = AssemblyInvGroup.Key,
+                                orderid = AssemblyInvGroup.Key,   
                                 numInvoiced = inAutoPieces.Count.ToString(),
                                 numOrders = piecesInOrderDetails,
                                 storeid = orderDetail.StoreID,
