@@ -290,7 +290,7 @@ namespace DataAccessLayer
             }
             //we have the possible mismatches between orderdetails pieces and autosort now group by customerid. there 
             //might be multiple mismatches for same customer in which case we need to look at group as a whole
-            //
+            //    
             var groupedbyCust = miss.GroupBy(g => g.customerid).ToList();
             foreach (var missGroup in groupedbyCust)
             {
