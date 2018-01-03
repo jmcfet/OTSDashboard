@@ -152,7 +152,7 @@ namespace DataAccessLayer
                         break;
                 }
 
-                List<CustomerInfo> info = FindInvoicesToCheck(storeNames[storeid]);
+                List<CustomerInfo> info = FindInvoicesToCheck(dbStore,storeNames[storeid]);
                 storecounts.AddRange(info);
 
 
@@ -160,7 +160,26 @@ namespace DataAccessLayer
             }
             return storecounts;
         }
-
+        StoreContext GetDBStore(int storeid)
+        {
+            StoreContext dbStore = dbStore1;
+            switch (storeid)
+            {
+                case 1:
+                    dbStore = dbStore1;
+                    break;
+                case 2:
+                    dbStore = dbStore2;
+                    break;
+                case 3:
+                    dbStore = dbStore3;
+                    break;
+                case 4:
+                    dbStore = dbStore4;
+                    break;
+            }
+            return dbStore;
+        }
         public List<missingPieceInfo> FindMissingOrders(string storeName)
         {
             
@@ -182,19 +201,8 @@ namespace DataAccessLayer
             foreach (var AssemblyInvGroup in invsGroupedByOrderID)
             {
                 int storeid = AssemblyInvGroup.First().StoreID;
-                dbStore = dbStore1;
-                switch (storeid)
-                {
-                    case 1:
-                        dbStore = dbStore2;
-                        break;
-                    case 2:
-                        dbStore = dbStore3;
-                        break;
-                    case 3:
-                        dbStore = dbStore4;
-                        break;
-                }
+                dbStore = GetDBStore(storeid);
+                
                 //find all the orderdetail objects with this orderid and group by orderid
                 var ordersGroup = from order in dbStore.OrderDetails
                          where AssemblyInvGroup.Key == order.OrderID
@@ -237,6 +245,8 @@ namespace DataAccessLayer
 
                 }
             }
+
+            
             //we have the possible mismatches between orderdetails pieces and autosort now group by customerid. there 
             //might be multiple mismatches for same customer in which case we need to look at group as a whole
             //    
@@ -259,11 +269,11 @@ namespace DataAccessLayer
             return missFilteredbyCustomerid.OrderBy(o => o.storeid).ToList(); ;
         }
 
-        private List<CustomerInfo> FindInvoicesToCheck(string storeName)
+        private List<CustomerInfo> FindInvoicesToCheck(StoreContext dbStore,string storeName)
         {
-            var q1 = from inv in dbStore1.Invoices
+            var q1 = from inv in dbStore.Invoices
                      where inv.BaggerMemo != null && inv.PickupDate == null && inv.Rack != null && inv.Rack.ToLower() != "bagged"
-                     from cust in dbStore1.Customers
+                     from cust in dbStore.Customers
                      where inv.CustomerID == cust.CustomerID
                      select new CustomerInfo() { storeName = storeName, FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
 
@@ -273,7 +283,7 @@ namespace DataAccessLayer
             List<int> processed = (from c in dbBCS.CPRs
                                    where c.state == 1 && c.store == storeName
                                    select c.invoiceid).ToList();
-            List<int> invPaided = (from i in dbStore1.InvPaids
+            List<int> invPaided = (from i in dbStore.InvPaids
                                    select i.InvoiceID).ToList();
             //if invoice was processed then remove
             invinfo = (from inv in invinfo
@@ -287,22 +297,12 @@ namespace DataAccessLayer
         // find orders lost on the conveyor due to a missing rack location.
         public List<OrdersLostOnRacktoMissingRackLocationData> OrdersLostOnRacktoMissingRackLocation()
         {
-            StoreContext[] connectStrings = new StoreContext[4];
-            ConnectionStringSettingsCollection connections = ConfigurationManager.ConnectionStrings;
-            string StoreConnectionString = connections["StoreContext"].ConnectionString;
             StoreContext CurrentContext = null; 
-            connectStrings[0] = new StoreContext(StoreConnectionString);
-            //      List<Invoice> invs = assembly.Invoices.Take(10).ToList();
-            StoreConnectionString = connections["Store2Context"].ConnectionString;
-            connectStrings[1] = new StoreContext(StoreConnectionString);
-            StoreConnectionString = connections["Store3Context"].ConnectionString;
-            connectStrings[2] = new StoreContext(StoreConnectionString);
-            StoreConnectionString = connections["Store4Context"].ConnectionString;
-            connectStrings[3] = new StoreContext(StoreConnectionString);
+          
             List<OrdersLostOnRacktoMissingRackLocationData> ListData = new List<OrdersLostOnRacktoMissingRackLocationData>();
             for (int i = 0; i < 4; i++)
             {
-                CurrentContext = connectStrings[i];
+                CurrentContext = GetDBStore(i);
                 DateTime prev = DateTime.Today.AddDays(-7).Date;
                 var invs = from inv in CurrentContext.Invoices
                            where DbFunctions.TruncateTime(inv.DueDate) >= prev.Date
