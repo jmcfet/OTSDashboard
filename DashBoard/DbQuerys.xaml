@@ -8,6 +8,15 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel>
+            <Label Name="last"  Height="50" Width="170" HorizontalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                
+                 <RadioButton GroupName="Os" Content="today" IsChecked="True" Click="RadioButton_Click"/>
+                <RadioButton Name="plus1" GroupName="Os" Margin="20,0" Content="today + next day" Click="plus1_Click"/>
+                <RadioButton Name="Plus2" GroupName="Os" Content="today + next 2 days" Click="Plus2_Click"/>
+                    
+                
+            </StackPanel>
         <StackPanel HorizontalAlignment="Center" Height="60" Margin="10,34,0,0" VerticalAlignment="Top"  Orientation="Horizontal">
                 <Button Name="cpr" Content="CPR " Margin="0,0,10,0" Click="button_Click"/>
                 <Button  Name="missing" Content="Missing" Margin="0,0,10,0" Click="button_Click"/>
@@ -17,9 +26,9 @@
                 <Button Name="tops" Content="tops" Margin="0,0,10,0" Click="button_Click"/>
                 <Button Name="households"  Margin="0,0,10,0" Click="button_Click"/>
                 <Button Name="Missingonrack"  Margin="0,0,10,0" Click="button_Click"/>
-                <Label Name="last"  Height="50" Width="170" />
+                
             </StackPanel>
-    <DataGrid Name="details"  HorizontalAlignment="Center" Width="600" Height="600"  Margin="0,10"/>
+    <DataGrid Name="details"  HorizontalAlignment="Center" Width="600" Height="600" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -37,6 +37,7 @@ namespace DashBoard
         List<CustomerInfo> cprInfo;
         List<GarmentIds> gids;
         List<OrdersLostOnRacktoMissingRackLocationData> missingOnrrack;
+        int addDays = 0;
         
         OTSAccess dal = new OTSAccess();
         private Object thisLock = new Object();
@@ -75,14 +76,14 @@ namespace DashBoard
         }
         void GetResults()
         {
-            shirtsNotDone = dal.getItemCount("Shirts");
+            shirtsNotDone = dal.getItemCount("Shirts",addDays);
           
            
-            topsNotDone = dal.getItemCount("tops");
+            topsNotDone = dal.getItemCount("tops", addDays);
             
-            bottomsNotDone = dal.getItemCount("bottoms");
+            bottomsNotDone = dal.getItemCount("bottoms", addDays);
            
-            houseHolds = dal.getItemCount("Household");
+            houseHolds = dal.getItemCount("Household", addDays);
            
             missingorders = dal.FindMissingOrders("test");
             
@@ -104,10 +105,12 @@ namespace DashBoard
             households.Content = string.Format("Household {0}", houseHolds.Count);
             
             missing.Content = string.Format("missing {0}", missingorders.Count);
-           
+            if (missingorders.Count > 0)
+                missing.Background = new SolidColorBrush(Colors.Red);
             cpr.Content = string.Format("CPR {0}", cprInfo.Count);
             Missingonrack.Content = string.Format("rackmissing {0}", missingOnrrack.Count);
-
+            if (missingOnrrack.Count > 0)
+                Missingonrack.Background = new SolidColorBrush(Colors.Red);
         }
     
         private void button_Click(object sender, RoutedEventArgs e)
@@ -150,7 +153,22 @@ namespace DashBoard
 
             }
         }
-   
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            addDays = 0;
+        }
+
+        private void plus1_Click(object sender, RoutedEventArgs e)
+        {
+            addDays = 1;
+        }
+
+        private void Plus2_Click(object sender, RoutedEventArgs e)
+        {
+            addDays = 2;
+        }
+
         private void cpr_Click(object sender, RoutedEventArgs e)
         {
             details.ItemsSource = cprInfo;
