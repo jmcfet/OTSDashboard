@@ -291,6 +291,7 @@ namespace DataAccessLayer
                        orderby inv.rack
                        select inv).ToList();
 
+              
             return invinfo;
 
         }
@@ -300,7 +301,7 @@ namespace DataAccessLayer
             StoreContext CurrentContext = null; 
           
             List<OrdersLostOnRacktoMissingRackLocationData> ListData = new List<OrdersLostOnRacktoMissingRackLocationData>();
-            for (int i = 0; i < 4; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 CurrentContext = GetDBStore(i);
                 DateTime prev = DateTime.Today.AddDays(-7).Date;
@@ -320,7 +321,7 @@ namespace DataAccessLayer
                         storeID = i
                     };
                     ListData.Add(data);
-
+                   
                 }
            
             }
