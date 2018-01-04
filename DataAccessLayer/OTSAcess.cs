@@ -341,7 +341,7 @@ namespace DataAccessLayer
                      where DbFunctions.TruncateTime(auto.DueDate) >= DateTime.Today && DbFunctions.TruncateTime(auto.DueDate) <= dueDate
                      && auto.Status == "R"
                      select new ShirtInfo { articleID = inv.ArticleCode, invoiceID = inv.InvoiceID, dueDate = auto.DueDate };
-
+                
            
             return q1.ToList();
 
