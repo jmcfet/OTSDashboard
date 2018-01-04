@@ -28,15 +28,18 @@
                 <Button Name="Missingonrack"  Margin="0,0,10,0" Click="button_Click"/>
                 
             </StackPanel>
-    <DataGrid Name="details"  HorizontalAlignment="Center" Width="600" Height="300" >
-                <!--<DataGrid.RowHeaderTemplate>
+    <DataGrid Name="detailswithCheck" AutoGeneratingColumn="details_AutoGeneratingColumn" HorizontalAlignment="Center" Width="600" Height="300" Visibility="Collapsed">
+                <DataGrid.RowHeaderTemplate>
                     <DataTemplate>
                         <Grid>
-                            <CheckBox IsChecked="False"/>
+                            <CheckBox Name="check" IsChecked="False" Checked="check_Checked" />
                         </Grid>
                     </DataTemplate>
-                </DataGrid.RowHeaderTemplate>-->
+                </DataGrid.RowHeaderTemplate>
         </DataGrid>
+            <DataGrid Name="details"  HorizontalAlignment="Center" Width="600" Height="300" >
+               
+            </DataGrid>
         </StackPanel>
     </Grid>
 </UserControl>
