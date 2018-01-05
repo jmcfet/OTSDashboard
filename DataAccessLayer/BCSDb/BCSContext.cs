@@ -8,7 +8,7 @@ namespace DataAccessLayer
     public partial class BCSContext : DbContext
     {
         public BCSContext()
-            : base("name=BCSContext")
+            : base("name=BCSContext2")
         {
         }
 
@@ -19,6 +19,8 @@ namespace DataAccessLayer
         public virtual DbSet<CPR> CPRs { get; set; }
         public virtual DbSet<GSS> GSSes { get; set; }
         public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<OTISIdsToFabId> OTISIdsToFabIds { get; set; }
+     //   public virtual DbSet<OTSIDtoFAB> OTSIDtoFABs { get; set; }
         public virtual DbSet<Printer> Printers { get; set; }
         public virtual DbSet<QCSInfo> QCSInfoes { get; set; }
 
@@ -74,6 +76,10 @@ namespace DataAccessLayer
             modelBuilder.Entity<Item>()
                 .Property(e => e.State)
                 .IsFixedLength();
+
+            //modelBuilder.Entity<OTSIDtoFAB>()
+            //    .Property(e => e.PriceTable)
+            //    .IsFixedLength();
         }
     }
 }

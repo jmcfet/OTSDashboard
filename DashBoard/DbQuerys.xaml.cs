@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -34,20 +33,20 @@ namespace DashBoard
             InitializeComponent();
             Loaded += Dbresults_Loaded;
         }
-        List<ShirtInfo> shirtsNotDone, bottomsNotDone, topsNotDone, houseHolds;
+        List<ShirtInfo> shirtsNotDone, bottomsNotDone, topsNotDone,houseHolds;
         List<missingPieceInfo> missingorders;
         List<CustomerInfo> cprInfo;
         List<GarmentIds> gids;
         List<OrdersLostOnRacktoMissingRackLocationData> missingOnrrack;
         int addDays = 0;
-
+        
         OTSAccess dal = new OTSAccess();
         private Object thisLock = new Object();
         string lastDisplayed;
 
         private void Dbresults_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
             GetResults();
             ShowResults();
             timer = new System.Timers.Timer();
@@ -62,7 +61,6 @@ namespace DashBoard
         {
             lock (thisLock)
             {
-
                 GetResults();
                 Application.Current.Dispatcher.Invoke(
                     DispatcherPriority.SystemIdle,
@@ -71,42 +69,42 @@ namespace DashBoard
 
                         ShowResults();
                         last.Content = string.Format("update {0}", DateTime.Now.ToShortTimeString());
-                        if (lastDisplayed != null)
+                        if (lastDisplayed != null )
                             ShowDetails();
                     }));
             }
-
+            
         }
         void GetResults()
         {
-            shirtsNotDone = dal.getItemCount("Shirts", addDays);
-
-
+            shirtsNotDone = dal.getItemCount("Shirts",addDays);
+          
+           
             topsNotDone = dal.getItemCount("tops", addDays);
-
+            
             bottomsNotDone = dal.getItemCount("bottoms", addDays);
-
+           
             houseHolds = dal.getItemCount("Household", addDays);
-
+           
             missingorders = dal.FindMissingOrders("test");
-
+            
             cprInfo = dal.getCPRCounts();
             missingOnrrack = dal.OrdersLostOnRacktoMissingRackLocation();
 
         }
         void ShowResults()
         {
-
+            
             shirts.Content = string.Format("Shirts {0}", shirtsNotDone.Count);
-
-
+            
+            
             tops.Content = string.Format("tops {0}", topsNotDone.Count);
-
+            
 
             bottoms.Content = string.Format("bottoms {0}", bottomsNotDone.Count);
-
+            
             households.Content = string.Format("Household {0}", houseHolds.Count);
-
+            
             missing.Content = string.Format("missing {0}", missingorders.Count);
             if (missingorders.Count > 0)
                 missing.Background = new SolidColorBrush(Colors.Red);
@@ -115,7 +113,7 @@ namespace DashBoard
             if (missingOnrrack.Count > 0)
                 Missingonrack.Background = new SolidColorBrush(Colors.Red);
         }
-
+    
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Button but = sender as Button;
@@ -129,28 +127,28 @@ namespace DashBoard
         }
         void ShowDetails()
         {
-
-            switch (lastDisplayed)
-            {
-                case "Shirts":
+            
+                switch (lastDisplayed)
+                {
+                    case "Shirts":
                     ObservableCollection<DataGridColumn> cols = details.Columns;
-                    DisplayDetails(shirtsNotDone);
-                    break;
-                case "tops":
-                    DisplayDetails(topsNotDone);
-                    break;
-                case "bottoms":
-                    DisplayDetails(bottomsNotDone);
-                    break;
-                case "Household":
-                    DisplayDetails(houseHolds);
-                    break;
-                case "missing":
-                    DisplayDetails(missingorders);
-                    break;
-                case "rackmissing":
-                    DisplayDetails(missingOnrrack);
-                    break;
+                        DisplayDetails(shirtsNotDone);
+                        break;
+                    case "tops":
+                        DisplayDetails(topsNotDone);
+                        break;
+                    case "bottoms":
+                        DisplayDetails(bottomsNotDone);
+                        break;
+                    case "Household":
+                        DisplayDetails(houseHolds);
+                        break;
+                    case "missing":
+                        DisplayDetails(missingorders);
+                        break;
+                    case "rackmissing":
+                        DisplayDetails(missingOnrrack);
+                        break;
                 case "CPR":
                     DisplayDetails(cprInfo);
                     break;
@@ -178,28 +176,49 @@ namespace DashBoard
             details.ItemsSource = cprInfo;
         }
 
+        
 
+        private void details_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            string test = (e as DataGridAutoGeneratingColumnEventArgs).PropertyName;
+           
+        }
 
+        private void check_Checked(object sender, RoutedEventArgs e)
+        {
 
-
+        }
 
         private void Missingonrack_Click(object sender, RoutedEventArgs e)
         {
             details.ItemsSource = missingOnrrack;
-
+           
         }
-
-
-
-        ObservableCollection<missingPieceInfo> miss;
+       
         void DisplayDetails<T>(List<T> list)
         {
-
-            details.ItemsSource = list;
-
-
+            Type type = list.GetType().GetGenericArguments()[0];
+            if (type.Name == "missingPieceInfo" || type.Name == "OrdersLostOnRacktoMissingRackLocationData")
+            {
+                detailswithCheck.Visibility = Visibility.Visible;
+                details.Visibility = Visibility.Collapsed;
+                detailswithCheck.ItemsSource = list;
+            }
+            else
+            {
+                detailswithCheck.Visibility = Visibility.Collapsed;
+                details.Visibility = Visibility.Visible;
+                details.ItemsSource = list;
+            }
+            
         }
-
+        private void dtgWorkProgress_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "CardsToProcess")
+            {
+                e.Cancel = true;
+            }
+        }
         //private void Garments_Click(object sender, RoutedEventArgs e)
         //{
         //    details.ItemsSource = gids;

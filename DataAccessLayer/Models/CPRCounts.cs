@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnTheSpot.Models
+namespace DataAccessLayer.Models
 {
-    public class Printer
+    public class CPRCounts
     {
         public string Store { get; set; }
-        public string PrinterName { get; set; }
+        public int count { get; set; }
     }
 }
