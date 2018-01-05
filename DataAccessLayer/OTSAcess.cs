@@ -14,8 +14,8 @@ namespace DataAccessLayer
 {
     public class OTSAccess
     {
-      
-        StoreContext  dbOTS, db1OTS,db2OTS, db3OTS, db4OTS;
+
+        StoreContext dbOTS, db1OTS, db2OTS, db3OTS, db4OTS;
         BCSContext dbBCS = new BCSContext();
         //Unfortunately, you can only have one app.config file per executable, so if you have DLL’s linked into your application,
         //they cannot have their own app.config files.
@@ -27,7 +27,7 @@ namespace DataAccessLayer
 
         public OTSAccess()
         {
-           
+
         }
 
         public Employee GetEmployee(int empid)
@@ -85,18 +85,18 @@ namespace DataAccessLayer
             {
                 List<Appointment> dbAppts = dbBCS.Appointments.ToList();
 
-                
+
                 foreach (Appointment appt in dbAppts)
                 {
                     Models.Appointment model = new Models.Appointment()
                     {
-         //               ID = appt.ID,
+                        //               ID = appt.ID,
                         Body = appt.Body,
                         EndTime = (DateTime)appt.EndTime,
                         Location = appt.Location,
                         StartTime = (DateTime)appt.StartTime,
                         Subject = appt.Subject
-                       
+
                     };
                     modelAppts.Add(model);
                 }
@@ -127,7 +127,7 @@ namespace DataAccessLayer
             {
 
             }
-            
+
         }
         public ObservableCollection<CustomerInfo> GetInvoices(string storeName)
         {
@@ -167,11 +167,11 @@ namespace DataAccessLayer
             string StoreConnectionString = connections["StoreContext"].ConnectionString;
 
             db1OTS = new StoreContext();
-            
+
             db2OTS = new StoreContext(connections["Store2Context"].ConnectionString);
             db3OTS = new StoreContext(connections["Store3Context"].ConnectionString);
             db4OTS = new StoreContext(connections["Store4Context"].ConnectionString);
-            List<string> storeNames = new List<string>() { "Haile", "Millhopper" , "Westgate", "HuntersCrossing" };
+            List<string> storeNames = new List<string>() { "Haile", "Millhopper", "Westgate", "HuntersCrossing" };
             List<CustomerInfo> storecounts = new List<CustomerInfo>();
 
             for (int storeid = 0; storeid < 4; storeid++)
@@ -189,9 +189,9 @@ namespace DataAccessLayer
                         dbOTS = db4OTS;
                         break;
                 }
-               
-               List<CustomerInfo> info = FindInvoicesToCheck(storeNames[storeid]);
-         //       CPRCounts counts = new CPRCounts() { count = count1, Store = storeNames[storeid] };
+
+                List<CustomerInfo> info = FindInvoicesToCheck(storeNames[storeid]);
+                //       CPRCounts counts = new CPRCounts() { count = count1, Store = storeNames[storeid] };
                 storecounts.AddRange(info);
 
 
@@ -207,22 +207,22 @@ namespace DataAccessLayer
             string StoreConnectionString = connections["StoreContext"].ConnectionString;
 
             db1OTS = new StoreContext(StoreConnectionString);
-      //      List<Invoice> invs = assembly.Invoices.Take(10).ToList();
+            //      List<Invoice> invs = assembly.Invoices.Take(10).ToList();
             StoreConnectionString = connections["Store2Context"].ConnectionString;
             db2OTS = new StoreContext(StoreConnectionString);
             StoreConnectionString = connections["Store3Context"].ConnectionString;
             db3OTS = new StoreContext(StoreConnectionString);
             StoreConnectionString = connections["Store4Context"].ConnectionString;
             db4OTS = new StoreContext(StoreConnectionString);
-            List<DataAccessLayer.AssemblyDB.Invoice> invs  = assembly.Invoices.Take(10).ToList();
+            List<DataAccessLayer.AssemblyDB.Invoice> invs = assembly.Invoices.Take(10).ToList();
             List<missingPieceInfo> miss = new List<missingPieceInfo>();
             DateTime prev = DateTime.Today.AddDays(-1);
             var q1 = from inv in assembly.Invoices
                      where DbFunctions.TruncateTime(inv.InvoiceDate) >= prev
-                           
+
                      group inv by inv.OrderID into groupedinvs
                      select groupedinvs;
-                    
+
 
             foreach (var group1 in q1)
             {
@@ -240,7 +240,7 @@ namespace DataAccessLayer
                         dbOTS = db4OTS;
                         break;
                 }
-   //             Debug.WriteLine("invoice " + group1.Name);
+                //             Debug.WriteLine("invoice " + group1.Name);
                 var q2 = from order in dbOTS.OrderDetails
                          where group1.Key == order.OrderID
                          group order by order.OrderID into groupedby
@@ -251,7 +251,7 @@ namespace DataAccessLayer
                     {
                         int num = (int)group.Sum(o => o.Pieces);
                         DataAccessLayer.AssemblyDB.Invoice inv = group1.First();
-                        if (group.Sum(o=>o.Pieces) != group1.Sum(i=>i.Pieces))
+                        if (group.Sum(o => o.Pieces) != group1.Sum(i => i.Pieces))
                         {
                             missingPieceInfo info = new missingPieceInfo()
                             {
@@ -259,12 +259,12 @@ namespace DataAccessLayer
                                 numInvoiced = (int)group1.Sum(i => i.Pieces),
                                 numOrders = num,
                                 storeid = inv.StoreID,
-                                date= inv.InvoiceDate.ToString()
+                                date = inv.InvoiceDate.ToString()
                             };
                             miss.Add(info);
                         }
                     }
-                    
+
 
                 }
             }
@@ -276,10 +276,11 @@ namespace DataAccessLayer
         {
             var q1 = from inv in dbOTS.Invoices
                      where inv.BaggerMemo != null && inv.PickupDate == null && inv.Rack != null && inv.Rack.ToLower() != "bagged"
-                     from cust in dbOTS.Customers where inv.CustomerID == cust.CustomerID
-                     select new CustomerInfo() { storeName = storeName,   FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
-          
-            List<CustomerInfo> invinfo = q1.ToList();   
+                     from cust in dbOTS.Customers
+                     where inv.CustomerID == cust.CustomerID
+                     select new CustomerInfo() { storeName = storeName, FirstName = cust.FirstName, LastName = cust.LastName, rack = inv.Rack, invoiceID = inv.InvoiceID, invmemo = cust.InvReminder, baggermemo = inv.BaggerMemo };
+
+            List<CustomerInfo> invinfo = q1.ToList();
 
             //now get all the processed invoices that passed
             List<int> processed = (from c in dbBCS.CPRs
@@ -289,12 +290,12 @@ namespace DataAccessLayer
                                    select i.InvoiceID).ToList();
             //if invoice was processed then remove
             invinfo = (from inv in invinfo
-                       where !processed.Contains(inv.invoiceID) 
+                       where !processed.Contains(inv.invoiceID)
                        orderby inv.rack
                        select inv).ToList();
 
             return invinfo;
-     
+
         }
 
         public List<ShirtInfo> getShirtCount()
@@ -304,7 +305,7 @@ namespace DataAccessLayer
                      where inv.GarmentID == 100 || inv.GarmentID == 345
                      join auto in assembly.AutoSorts on inv.ArticleCode equals auto.ArticleCode
                      where DbFunctions.TruncateTime(auto.DueDate) == DateTime.Today
-                     select new ShirtInfo { articleID = inv.ArticleCode , invoiceID = inv.InvoiceID, dueDate = auto.DueDate};
+                     select new ShirtInfo { articleID = inv.ArticleCode, invoiceID = inv.InvoiceID, dueDate = auto.DueDate };
 
             //var q3 = from inv in assembly.InvoiceDetails
             //         where inv.GarmentID == 100 || inv.GarmentID == 345
@@ -320,12 +321,28 @@ namespace DataAccessLayer
             //        filtered.Add(det);
             //}
             return q1.ToList();
-         
+
         }
+        public List<GarmentIds> getTypes()
+        {
 
 
+            DataAccessLayer.AssemblyDB.Assembly assembly = new DataAccessLayer.AssemblyDB.Assembly();
+            assembly.Database.Log = Console.Write;
+            List<DataAccessLayer.AssemblyDB.InvoiceDetail> distinctPeople = assembly.InvoiceDetails
+.GroupBy(p => p.GarmentID)
+.Select(g => g.FirstOrDefault())
+.ToList();
+            List<GarmentIds> gids = new List<GarmentIds>();
+            foreach (DataAccessLayer.AssemblyDB.InvoiceDetail inv in distinctPeople)
+            {
+                GarmentIds g1 = new GarmentIds() { garmentID = inv.GarmentID, desc = inv.DetailDesc };
+                gids.Add(g1);
+            }
+
+            return gids;
+        }
     }
-
     public class CustomerInfo
     {
         public string storeName { get; set; }
@@ -354,5 +371,11 @@ namespace DataAccessLayer
         public int invoiceID { get; set; }
         public string articleID { get; set; }
         public DateTime? dueDate { get; set; }
+    }
+    public class GarmentIds
+    {
+        public int garmentID { get; set; }
+        public string desc { get; set; }
+      
     }
 }

@@ -88,30 +88,23 @@ namespace DashBoard
             InitializeComponent();
             Loaded += MainWindow_Loaded;  
         }
-        public List<missingPieceInfo> missing;
+       
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
 
            
            Results.Content = new DbQuerys();
-            //     AssemblyConnectionString = connections["AssemblyEntities"].ConnectionString;
-
-            //OTSAccess dal = new OTSAccess(StoreConnectionString);
-            //missing = dal.FindMissingOrders("test");
-            //data.ItemsSource = missing;
-            //string error = string.Empty;
-            //System.Collections.ObjectModel.ObservableCollection<Category> cats = dal.GetCats(out error);
-
+           
             string basedir = @"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\";
 
             NewAppFrame(basedir, "BCS.exe", bcs);
             NewAppFrame(basedir, "qcs.exe", qcs);
             NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", sch);
             WebBrowserHelper.ClearCache();
-            //wbSample.Navigate("http://192.168.1.3");
-            //HideScriptErrors(wbSample, true);
-          }
-
+            wbSample.Navigate("http://192.168.1.3");
+            HideScriptErrors(wbSample, true);
+        }
+        //host the input WPF exe in a Dockpanel by adding a windowsformhost to the input panel
         void NewAppFrame(string basedir,string exe, DockPanel panel)
         {
             
@@ -131,7 +124,7 @@ namespace DashBoard
             System.Windows.Forms.Panel _pnlSched = new System.Windows.Forms.Panel();
             WindowsFormsHost windowsFormsHost1 = new WindowsFormsHost();
 
-            windowsFormsHost1.Child = _pnlSched;
+            windowsFormsHost1.Child = _pnlSched;   //host the panel in windowsformhost
 
             panel.Children.Add(windowsFormsHost1);
 
@@ -147,11 +140,11 @@ namespace DashBoard
             _appWin = _childp.MainWindowHandle;
             //      PR.WaitForInputIdle(); // true if the associated process has reached an idle state.
             SetParent(_appWin, _pnlSched.Handle); // loading exe to the wpf window.
-           
-            SetWindowPos(_pnlSched.Handle,IntPtr.Zero, 0, 0, 100, 100, SWP_SHOWWINDOW);
-            // if (GetWindowRect(_pnlSched.Handle, ref Rect))
-            ////     MoveWindow(_appWin, (int)Rect.Left, (int)Rect.Right, (int)Rect.Right - (int)Rect.Left, (int)Rect.Bottom - (int)Rect.Top + 50, true);
-            //     MoveWindow(_appWin, 0, 0, 800, 800, true);
+            Rect Rect = new Rect();
+            SetWindowPos(_pnlSched.Handle,IntPtr.Zero, 0, 0, 800, 800, SWP_SHOWWINDOW );
+            if (GetWindowRect(_pnlSched.Handle, ref Rect))
+           //          MoveWindow(_appWin, (int)Rect.Left, (int)Rect.Right, (int)Rect.Right - (int)Rect.Left, (int)Rect.Bottom - (int)Rect.Top + 50, true);
+                MoveWindow(_appWin, 0, 0, 800, 800, true);
             int oldStyle = (int)GetWindowLong(_appWin, GWL_STYLE);
         }
         //this will hide the ugly script errors that are thrown by the WPF browser.

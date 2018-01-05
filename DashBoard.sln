@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DashBoard", "DashBoard\DashBoard.csproj", "{416DEA9E-EC9C-4140-B86E-78C68F24F6EA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{CA499FB6-721E-460A-B81A-CC74E0B5B9CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +15,11 @@ Global
 		{416DEA9E-EC9C-4140-B86E-78C68F24F6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{416DEA9E-EC9C-4140-B86E-78C68F24F6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{416DEA9E-EC9C-4140-B86E-78C68F24F6EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA499FB6-721E-460A-B81A-CC74E0B5B9CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA499FB6-721E-460A-B81A-CC74E0B5B9CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA499FB6-721E-460A-B81A-CC74E0B5B9CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA499FB6-721E-460A-B81A-CC74E0B5B9CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {762037B9-1CAF-4A6D-93AA-EDD749266969}
 	EndGlobalSection
 EndGlobal
