@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -92,14 +93,19 @@ namespace DashBoard
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
 
-           
-           Results.Content = new DbQuerys();
-           
-            string basedir = @"C:\Repos\OnSpot17\OnTheSpot\bin\Debug\";
+            var infoPath = @"Dropbox\info.json";
 
-            NewAppFrame(basedir, "BCS.exe", bcs);
-            NewAppFrame(basedir, "qcs.exe", qcs);
-            NewAppFrame(@"C:\Users\jmcfe\OneDrive\Documents\Visual Studio 2017\Projects\scheduler\scheduler\bin\Debug\", "scheduler.exe", sch);
+            var jsonPath = System.IO.Path.Combine(Environment.GetEnvironmentVariable("LocalAppData"), infoPath);
+
+            if (!File.Exists(jsonPath)) jsonPath = System.IO.Path.Combine(Environment.GetEnvironmentVariable("AppData"), infoPath);
+
+            if (!File.Exists(jsonPath)) throw new Exception("Dropbox could not be found!");
+
+            var dropboxPath = File.ReadAllText(jsonPath).Split('\"')[5].Replace(@"\\", @"\");
+            Results.Content = new DbQuerys();
+            NewAppFrame(dropboxPath + @"\OnTheSpotBins\BCS\", "BCS.exe", bcs);
+            NewAppFrame(dropboxPath + @"\OnTheSpotBins\QCS\", "qcs.exe", qcs);
+            NewAppFrame(dropboxPath + @"\Scheduler\", "scheduler.exe", sch);
             WebBrowserHelper.ClearCache();
             wbSample.Navigate("http://192.168.1.3");
             HideScriptErrors(wbSample, true);
